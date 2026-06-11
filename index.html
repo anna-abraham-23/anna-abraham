@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anna Abraham</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:    #111111;
+      --ink:      #222222;
+      --soft:     #444444;
+      --muted:    #888888;
+      --rule:     #e0ddd8;
+      --rule-lt:  #eeebe6;
+      --bg:       #faf9f6;
+      --bg-warm:  #f4f1eb;
+      --white:    #ffffff;
+      --serif:    'Playfair Display', Georgia, serif;
+      --sans:     'Inter', -apple-system, sans-serif;
+      --ease:     cubic-bezier(0.4, 0, 0.2, 1);
+      --max:      1080px;
+      --pad:      clamp(20px, 5vw, 60px);
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,249,246,0.93);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-inner {
+      max-width: var(--max); margin: 0 auto;
+      padding: 0 var(--pad); height: 66px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--serif); font-size: 1.2rem;
+      font-weight: 600; color: var(--black); letter-spacing: -0.01em;
+      cursor: pointer;
+    }
+
+    .nav-links { display: flex; align-items: center; gap: 2.2rem; }
+
+    .nav-links button {
+      background: none; border: none; cursor: pointer;
+      font-family: var(--sans); font-size: 0.82rem; font-weight: 500;
+      letter-spacing: 0.02em; color: var(--muted);
+      padding: 0; position: relative;
+      transition: color 0.2s var(--ease);
+    }
+
+    .nav-links button::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 1.5px; background: var(--black);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.25s var(--ease);
+    }
+
+    .nav-links button:hover,
+    .nav-links button.active { color: var(--black); }
+    .nav-links button.active::after { transform: scaleX(1); }
+
+    /* ── VIEWS ── */
+    .view { display: none; flex: 1; flex-direction: column; animation: fadeUp 0.35s var(--ease) both; }
+    .view.active { display: flex; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SHARED ── */
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
+
+    .page-hero {
+      padding: 68px 0 56px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .page-hero .tag {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); display: block; margin-bottom: 12px;
+    }
+
+    .page-hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 700; letter-spacing: -0.025em;
+      line-height: 1.1; color: var(--black); margin-bottom: 14px;
+    }
+
+    .page-hero p {
+      font-size: 1rem; line-height: 1.75;
+      color: var(--soft); max-width: 500px; font-weight: 300;
+    }
+
+    /* ══════════════════════════════
+       HOME
+    ══════════════════════════════ */
+    .home-hero {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 72px;
+      align-items: center;
+      padding: 88px var(--pad) 80px;
+      max-width: var(--max); margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .hero-eyebrow::before { content: none; }
+
+    .hero-h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: -0.025em; color: var(--black); margin-bottom: 22px;
+    }
+
+    .hero-h1 em { font-style: italic; font-weight: 400; color: var(--soft); }
+
+    .hero-sub {
+      font-size: 1rem; line-height: 1.78;
+      color: var(--soft); max-width: 440px;
+      margin-bottom: 36px; font-weight: 300;
+    }
+
+    .btn-dark {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: var(--black); color: var(--white);
+      font-size: 0.82rem; font-weight: 600;
+      letter-spacing: 0.04em; padding: 12px 26px;
+      border-radius: 5px; border: none; cursor: pointer;
+      font-family: var(--sans);
+      transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+    }
+
+    .btn-dark:hover { opacity: 0.8; transform: translateY(-1px); }
+    .btn-dark svg   { transition: transform 0.2s var(--ease); }
+    .btn-dark:hover svg { transform: translateX(3px); }
+
+    /* Paper illustration */
+    .paper-card {
+      background: var(--white); border: 1px solid var(--rule);
+      border-radius: 10px; padding: 32px 28px 28px;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.07), 0 2px 8px rgba(0,0,0,0.03);
+      position: relative; overflow: hidden;
+    }
+
+    .paper-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 48px; width: 1px; height: 100%;
+      background: #e4d4f4; opacity: 0.45;
+    }
+
+    .paper-pen-icon { margin-bottom: 18px; opacity: 0.3; }
+
+    .paper-lines { display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px; }
+
+    .pl { height: 1px; background: var(--rule-lt); border-radius: 1px; }
+    .pl.s  { width: 52%; }
+    .pl.m  { width: 76%; }
+    .pl.l  { width: 100%; }
+    .pl.xl { width: 87%; }
+
+    /* Latest posts */
+    .home-posts { padding: 60px 0 96px; border-top: 1px solid var(--rule); }
+
+    .home-posts-header {
+      display: flex; align-items: baseline;
+      justify-content: space-between; margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-family: var(--serif); font-size: 1.8rem;
+      font-weight: 600; letter-spacing: -0.01em; color: var(--black);
+    }
+
+    .text-link {
+      font-size: 0.8rem; font-weight: 500; color: var(--muted);
+      display: inline-flex; align-items: center; gap: 6px;
+      background: none; border: none; cursor: pointer;
+      font-family: var(--sans);
+      transition: color 0.2s, gap 0.2s var(--ease);
+    }
+
+    .text-link:hover { color: var(--black); gap: 10px; }
+
+    .posts-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1px; background: var(--rule-lt);
+      border: 1px solid var(--rule-lt); border-radius: 8px; overflow: hidden;
+    }
+
+    .post-card {
+      display: block; background: var(--bg);
+      padding: 28px 24px;
+      transition: background 0.2s var(--ease);
+      cursor: pointer;
+    }
+
+    .post-card:hover { background: var(--white); }
+
+    .pc-date {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); display: block; margin-bottom: 10px;
+    }
+
+    .pc-title {
+      font-family: var(--serif); font-size: 1.1rem;
+      font-weight: 600; line-height: 1.35;
+      color: var(--black); margin-bottom: 8px; letter-spacing: -0.01em;
+    }
+
+    .pc-excerpt {
+      font-size: 0.82rem; line-height: 1.65;
+      color: var(--muted); margin-bottom: 16px;
+    }
+
+    .pc-read {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--soft); display: inline-flex;
+      align-items: center; gap: 5px;
+      transition: gap 0.2s var(--ease), color 0.2s;
+    }
+
+    .post-card:hover .pc-read { color: var(--black); gap: 9px; }
+
+    .empty-state {
+      grid-column: 1/-1; padding: 72px 24px;
+      text-align: center; background: var(--bg);
+    }
+
+    .empty-state svg { margin: 0 auto 16px; opacity: 0.2; }
+
+    .empty-state p {
+      font-family: var(--serif); font-size: 1.1rem;
+      font-style: italic; color: var(--muted);
+    }
+
+    /* ══════════════════════════════
+       ABOUT
+    ══════════════════════════════ */
+    .about-section { padding: 68px 0 96px; }
+
+    .about-photo {
+      width: 100%; max-width: 340px;
+      aspect-ratio: 3 / 4;
+      border-radius: 4px;
+      display: block;
+      margin: 0 0 36px 0;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 68px; align-items: start;
+    }
+
+    .about-body p {
+      font-size: 0.97rem; line-height: 1.9;
+      color: var(--soft); margin-bottom: 1.5em; font-weight: 300;
+      text-align: justify;
+    }
+
+    .about-body p:first-child::first-letter {
+      font-family: var(--serif); font-size: 3.6rem;
+      font-weight: 700; line-height: 0.8;
+      float: left; margin: 0.06em 0.12em 0 0; color: var(--black);
+    }
+
+    .pull-quote {
+      border-left: 3px solid var(--black);
+      padding: 4px 0 4px 22px; margin: 32px 0;
+    }
+
+    .pull-quote blockquote {
+      font-family: var(--serif); font-size: 1.25rem;
+      font-style: italic; line-height: 1.5; color: var(--black);
+    }
+
+    .about-sidebar { display: flex; flex-direction: column; gap: 14px; }
+
+    .sidebar-card {
+      background: var(--white); border: 1px solid var(--rule);
+      border-radius: 8px; padding: 22px;
+    }
+
+    .sidebar-card h3 {
+      font-size: 0.63rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); border-bottom: 1px solid var(--rule-lt);
+      padding-bottom: 9px; margin-bottom: 13px;
+    }
+
+    .sidebar-card ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+
+    .sidebar-card li {
+      font-size: 0.83rem; line-height: 1.5;
+      color: var(--soft); padding-left: 14px; position: relative;
+    }
+
+    .sidebar-card li::before { content: '—'; position: absolute; left: 0; color: var(--rule); }
+
+    .notebook-card {
+      background: var(--bg-warm); border: 1px solid var(--rule);
+      border-radius: 8px; padding: 22px;
+      position: relative; overflow: hidden;
+    }
+
+    .notebook-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 36px; width: 1px; height: 100%;
+      background: #dcc8f0; opacity: 0.5;
+    }
+
+    .nb { height: 1px; background: var(--rule); margin-bottom: 13px; border-radius: 1px; }
+    .nb.s  { width: 50%; }
+    .nb.m  { width: 74%; }
+    .nb.l  { width: 100%; }
+    .nb.xl { width: 86%; }
+
+    /* ══════════════════════════════
+       BLOG LIST
+    ══════════════════════════════ */
+    .blogs-section { padding: 52px 0 96px; }
+
+    .blogs-toolbar {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding-bottom: 24px; border-bottom: 1px solid var(--rule);
+    }
+
+    .blogs-count {
+      font-size: 0.78rem; color: var(--muted); font-style: italic;
+    }
+
+    .blog-list { display: flex; flex-direction: column; }
+
+    .blog-entry {
+      display: grid;
+      grid-template-columns: 52px 1fr 30px;
+      gap: 22px; align-items: center;
+      padding: 26px 0;
+      border-bottom: 1px solid var(--rule-lt);
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background 0.15s var(--ease), padding 0.15s var(--ease), margin 0.15s var(--ease);
+    }
+
+    .blog-entry:hover {
+      background: var(--white);
+      margin: 0 -20px; padding: 26px 20px;
+      border-color: transparent;
+    }
+
+    .be-num {
+      font-family: var(--serif); font-size: 1.7rem;
+      font-weight: 700; color: var(--rule-lt);
+      line-height: 1; text-align: right;
+    }
+
+    .be-date {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 5px;
+    }
+
+    .be-title {
+      font-family: var(--serif);
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      font-weight: 600; line-height: 1.3;
+      letter-spacing: -0.01em; color: var(--black); margin-bottom: 5px;
+    }
+
+    .be-excerpt {
+      font-size: 0.82rem; line-height: 1.6;
+      color: var(--muted); font-weight: 300;
+    }
+
+    .be-arrow {
+      color: var(--rule); font-size: 1.1rem;
+      transition: color 0.15s, transform 0.2s var(--ease);
+    }
+
+    .blog-entry:hover .be-arrow { color: var(--black); transform: translateX(4px); }
+
+    /* ══════════════════════════════
+       POST VIEW
+    ══════════════════════════════ */
+    .post-header {
+      padding: 58px 0 44px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .post-back {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 28px;
+      background: none; border: none; cursor: pointer;
+      font-family: var(--sans);
+      transition: color 0.2s;
+    }
+
+    .post-back:hover { color: var(--black); }
+    .post-back svg   { transition: transform 0.2s var(--ease); }
+    .post-back:hover svg { transform: translateX(-3px); }
+
+    .post-chips {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px;
+    }
+
+    .chip {
+      font-size: 0.67rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); background: var(--bg-warm);
+      border: 1px solid var(--rule); padding: 3px 10px; border-radius: 100px;
+    }
+
+    .post-h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700; line-height: 1.12;
+      letter-spacing: -0.025em; color: var(--black); max-width: 700px;
+      margin-bottom: 14px;
+    }
+
+    .post-subtitle {
+      font-family: var(--serif);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 400; font-style: italic;
+      line-height: 1.5; color: var(--soft);
+      max-width: 640px;
+    }
+
+    .post-layout {
+      display: grid;
+      grid-template-columns: 1fr 240px;
+      gap: 60px; align-items: start;
+      padding: 52px 0 96px;
+    }
+
+    .post-body {
+      font-size: 1.05rem; line-height: 1.95;
+      color: var(--soft); font-weight: 300;
+    }
+
+    .post-body p { margin-bottom: 1.6em; text-align: justify; }
+
+    .post-body p:first-child::first-letter {
+      font-family: var(--serif); font-size: 3.8rem;
+      font-weight: 700; line-height: 0.78;
+      float: left; margin: 0.06em 0.12em 0 0; color: var(--black);
+    }
+
+    .post-sidebar { position: sticky; top: 80px; display: flex; flex-direction: column; gap: 12px; }
+
+    .post-sidebar-card {
+      background: var(--white); border: 1px solid var(--rule);
+      border-radius: 8px; padding: 20px;
+    }
+
+    .post-sidebar-card h4 {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 9px;
+      padding-bottom: 8px; border-bottom: 1px solid var(--rule-lt);
+    }
+
+    .post-sidebar-card p {
+      font-size: 0.82rem; line-height: 1.65; color: var(--soft);
+    }
+
+    .post-nav-row {
+      display: flex; justify-content: space-between;
+      padding: 22px 0; border-top: 1px solid var(--rule-lt);
+    }
+
+    .post-nav-btn {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); background: none; border: none;
+      cursor: pointer; font-family: var(--sans);
+      transition: color 0.2s;
+    }
+
+    .post-nav-btn:hover { color: var(--black); }
+
+    /* ══════════════════════════════
+       CONTACT
+    ══════════════════════════════ */
+    .contact-section { padding: 52px 0 96px; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 68px; align-items: start;
+    }
+
+    .contact-intro {
+      font-size: 0.95rem; line-height: 1.8;
+      color: var(--soft); margin-bottom: 30px; font-weight: 300;
+    }
+
+    .form { display: flex; flex-direction: column; gap: 18px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .field { display: flex; flex-direction: column; gap: 6px; }
+
+    .field label {
+      font-size: 0.69rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--soft);
+    }
+
+    .field input, .field textarea {
+      font-family: var(--sans); font-size: 0.9rem;
+      background: var(--white); border: 1.5px solid var(--rule);
+      border-radius: 5px; padding: 10px 13px;
+      color: var(--ink); outline: none;
+      transition: border-color 0.2s var(--ease); width: 100%;
+    }
+
+    .field input:focus, .field textarea:focus { border-color: var(--black); }
+    .field textarea { resize: vertical; min-height: 130px; }
+
+    .contact-aside { display: flex; flex-direction: column; gap: 12px; }
+
+    .info-card {
+      background: var(--white); border: 1px solid var(--rule);
+      border-radius: 8px; padding: 22px;
+    }
+
+    .info-card h3 {
+      font-size: 0.63rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 9px;
+      padding-bottom: 8px; border-bottom: 1px solid var(--rule-lt);
+    }
+
+    .info-card p {
+      font-size: 0.85rem; line-height: 1.7; color: var(--soft);
+    }
+
+    .info-card a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+    .pen-card {
+      background: var(--bg-warm); border: 1px solid var(--rule);
+      border-radius: 8px; padding: 26px 22px;
+      text-align: center; display: flex;
+      flex-direction: column; align-items: center; gap: 12px;
+    }
+
+    .pen-card p {
+      font-family: var(--serif); font-size: 0.93rem;
+      font-style: italic; color: var(--soft); line-height: 1.65;
+    }
+
+    .form-success {
+      display: none; background: var(--bg-warm);
+      border: 1px solid var(--rule); border-radius: 6px; padding: 20px;
+    }
+
+    .form-success strong {
+      font-family: var(--serif); font-size: 1rem;
+      font-weight: 600; display: block; margin-bottom: 4px; color: var(--black);
+    }
+
+    .form-success span { font-size: 0.82rem; color: var(--muted); }
+
+    /* ══════════════════════════════
+       FOOTER
+    ══════════════════════════════ */
+    .footer { background: var(--black); color: var(--bg); margin-top: auto; }
+
+    .footer-inner {
+      max-width: var(--max); margin: 0 auto;
+      padding: 52px var(--pad) 28px;
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 40px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-brand h2 {
+      font-family: var(--serif); font-size: 1.3rem;
+      font-weight: 600; margin-bottom: 9px; letter-spacing: -0.01em;
+    }
+
+    .footer-brand p {
+      font-size: 0.81rem; line-height: 1.7;
+      color: rgba(250,249,246,0.38); font-weight: 300;
+    }
+
+    .footer-col h4 {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(250,249,246,0.28); margin-bottom: 14px;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+    .footer-col button {
+      background: none; border: none; cursor: pointer;
+      font-family: var(--sans); font-size: 0.82rem;
+      color: rgba(250,249,246,0.52); text-align: left;
+      padding: 0; transition: color 0.2s;
+    }
+
+    .footer-col button:hover { color: var(--bg); }
+
+    .footer-bottom {
+      max-width: var(--max); margin: 0 auto;
+      padding: 18px var(--pad);
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.7rem; color: rgba(250,249,246,0.24);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 880px) {
+      .home-hero      { grid-template-columns: 1fr; gap: 48px; }
+      .about-grid     { grid-template-columns: 1fr; }
+      .contact-grid   { grid-template-columns: 1fr; }
+      .post-layout    { grid-template-columns: 1fr; }
+      .post-sidebar   { display: none; }
+      .posts-grid     { grid-template-columns: 1fr 1fr; }
+      .footer-inner   { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 580px) {
+      .nav-links { gap: 1.2rem; }
+      .posts-grid  { grid-template-columns: 1fr; }
+      .form-row    { grid-template-columns: 1fr; }
+      .blog-entry  { grid-template-columns: 1fr; }
+      .be-num, .be-arrow { display: none; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <span class="nav-logo" onclick="navigate('home')">Anna Abraham</span>
+      <div class="nav-links">
+        <button onclick="navigate('home')"    id="nav-home">Home</button>
+        <button onclick="navigate('about')"   id="nav-about">About</button>
+        <button onclick="navigate('blog')"    id="nav-blog">Blog</button>
+        <button onclick="navigate('contact')" id="nav-contact">Contact</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════
+       HOME VIEW
+  ══════════════════════════════ -->
+  <div class="view active" id="view-home">
+
+    <div class="home-hero">
+      <div>
+        <p class="hero-eyebrow">Writer &amp; Observer</p>
+        <h1 class="hero-h1">Words written<br>with <em>intention.</em></h1>
+        <p class="hero-sub">A personal record of small things noticed.</p>
+        <button class="btn-dark" onclick="navigate('blog')">
+          Read the blog
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M2 6.5h9M6.5 2l4.5 4.5L6.5 11"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="paper-card">
+        <svg class="paper-pen-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M24 3L29 8L11 26L4 29L7 22L24 3Z"/>
+          <path d="M21 6L26 11"/>
+        </svg>
+        <div class="paper-lines">
+          <div class="pl l"></div>
+          <div class="pl xl"></div>
+          <div class="pl m"></div>
+          <div class="pl l"></div>
+          <div class="pl s"></div>
+          <div class="pl xl"></div>
+          <div class="pl m"></div>
+          <div class="pl l"></div>
+          <div class="pl s"></div>
+        </div>
+        <div style="display:flex;justify-content:flex-end">
+          <svg width="56" height="18" viewBox="0 0 56 18" fill="none" style="opacity:0.18">
+            <path d="M2 9 Q14 3 28 5 L52 9 L48 11 L28 13 Q14 15 2 9Z" fill="#111"/>
+            <path d="M48 9L56 9.5L48 11" fill="#777"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="home-posts">
+      <div class="container">
+        <div class="home-posts-header">
+          <h2 class="section-title">Latest posts</h2>
+          <button class="text-link" onclick="navigate('blog')">
+            View all
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M2 6h8M6 2l4 4-4 4"/>
+            </svg>
+          </button>
+        </div>
+        <div class="posts-grid" id="home-posts-grid"></div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <h2>Anna Abraham</h2>
+          <p>A personal record of small things noticed.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Pages</h4>
+          <ul>
+            <li><button onclick="navigate('home')">Home</button></li>
+            <li><button onclick="navigate('about')">About</button></li>
+            <li><button onclick="navigate('blog')">Blog</button></li>
+            <li><button onclick="navigate('contact')">Contact</button></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Info</h4>
+          <ul>
+            <li><button style="cursor:default">Est. 2025</button></li>
+                      </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Anna Abraham. All rights reserved.</span>
+        <span>Written with love.</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ══════════════════════════════
+       ABOUT VIEW
+  ══════════════════════════════ -->
+  <div class="view" id="view-about">
+    <div class="page-hero">
+      <div class="container">
+        <span class="tag">About me</span>
+        <h1>The person behind<br>the words.</h1>
+        <p>A personal record of small things noticed.</p>
+      </div>
+    </div>
+
+    <section class="about-section">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-body">
+            <p>Hello, I'm Anna.</p>
+            <p>I am a lawyer by training, a writer by compulsion, and a photographer when the light is right.</p>
+            <p>I did my LL.M in Intellectual Property Law at the University of Edinburgh, which is also, as it happens, where I live now. Law taught me to pay close attention to the details that other people walk past, because the detail you overlook is usually the one that matters most.</p>
+            <p>This blog is what happens when I cannot stop noticing things.</p>
+            <p>I am interested in the moment just before something happens, and the moment just after, and the strange, involuntary way the chest responds to both. The small, unremarkable scenes that most people pass through without a second thought.</p>
+            <p>I grew up in India and moved to Edinburgh for the LL.M. I stayed, which I suspect says something about either the city or the weather, and I have not yet decided which.</p>
+            <p>I travel when I can, photograph what stops me, and write about what I cannot stop thinking about. The three are not as separate as they sound. They are all, at their core, the same act: paying attention to the world and refusing to look away before it has finished telling you something.</p>
+            <p>If you have found your way here, I imagine you are the same kind of person. The kind who notices things.</p>
+            <p>Welcome.</p>
+          </div>
+
+          <aside class="about-sidebar">
+            <div class="notebook-card">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.1" style="margin-bottom:12px;opacity:0.6">
+                <rect x="3" y="2" width="16" height="20" rx="2"/>
+                <path d="M7 7h8M7 11h8M7 15h5"/>
+                <path d="M3 6h1M3 12h1M3 18h1"/>
+              </svg>
+              <div class="nb l"></div>
+              <div class="nb xl"></div>
+              <div class="nb m"></div>
+              <div class="nb l"></div>
+              <div class="nb s"></div>
+              <div class="nb xl"></div>
+            </div>
+            <div class="sidebar-card">
+              <h3>Quick facts</h3>
+              <ul>
+                <li>Writer &amp; chronic note-taker</li>
+                <li>Thinks in long sentences</li>
+                <li>Cuppa tea before words, always</li>
+                <li>Somewhere with nature</li>
+                <li>Believes in slow, careful writing</li>
+              </ul>
+            </div>
+            <div class="sidebar-card">
+              <h3>Interests</h3>
+              <ul>
+                <li>Photography</li>
+                <li>Plants and nature</li>
+                <li>Architecture &amp; space</li>
+                <li>Film &amp; visual storytelling</li>
+                <li>Philosophy of mind</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-brand"><h2>Anna Abraham</h2><p>A personal record of small things noticed.</p></div>
+        <div class="footer-col"><h4>Pages</h4><ul><li><button onclick="navigate('home')">Home</button></li><li><button onclick="navigate('about')">About</button></li><li><button onclick="navigate('blog')">Blog</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div>
+        <div class="footer-col"><h4>Info</h4><ul><li><button style="cursor:default">Est. 2025</button></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2025 Anna Abraham. All rights reserved.</span><span>Written with love.</span></div>
+    </footer>
+  </div>
+
+  <!-- ══════════════════════════════
+       BLOG VIEW
+  ══════════════════════════════ -->
+  <div class="view" id="view-blog">
+    <div class="page-hero">
+      <div class="container">
+        <span class="tag">All posts</span>
+        <h1>The blog.</h1>
+        <p>A personal record of small things noticed.</p>
+      </div>
+    </div>
+
+    <section class="blogs-section">
+      <div class="container">
+        <div class="blogs-toolbar">
+          <span class="blogs-count" id="blogs-count">—</span>
+        </div>
+        <div class="blog-list" id="blog-list"></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-brand"><h2>Anna Abraham</h2><p>A personal record of small things noticed.</p></div>
+        <div class="footer-col"><h4>Pages</h4><ul><li><button onclick="navigate('home')">Home</button></li><li><button onclick="navigate('about')">About</button></li><li><button onclick="navigate('blog')">Blog</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div>
+        <div class="footer-col"><h4>Info</h4><ul><li><button style="cursor:default">Est. 2025</button></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2025 Anna Abraham. All rights reserved.</span><span>Written with love.</span></div>
+    </footer>
+  </div>
+
+  <!-- ══════════════════════════════
+       POST VIEW
+  ══════════════════════════════ -->
+  <div class="view" id="view-post">
+    <div id="post-root"></div>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-brand"><h2>Anna Abraham</h2><p>A personal record of small things noticed.</p></div>
+        <div class="footer-col"><h4>Pages</h4><ul><li><button onclick="navigate('home')">Home</button></li><li><button onclick="navigate('about')">About</button></li><li><button onclick="navigate('blog')">Blog</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div>
+        <div class="footer-col"><h4>Info</h4><ul><li><button style="cursor:default">Est. 2025</button></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2025 Anna Abraham. All rights reserved.</span><span>Written with love.</span></div>
+    </footer>
+  </div>
+
+  <!-- ══════════════════════════════
+       CONTACT VIEW
+  ══════════════════════════════ -->
+  <div class="view" id="view-contact">
+    <div class="page-hero">
+      <div class="container">
+        <span class="tag">Get in touch</span>
+        <h1>Say hello.</h1>
+        <p>Have a thought, a response to something you read, or just want to connect? Write in.</p>
+      </div>
+    </div>
+
+    <section class="contact-section">
+      <div class="container">
+        <div class="contact-grid">
+          <div>
+            <p class="contact-intro">Whether you have a response to something you read, a question you'd like answered, or simply want to say that a piece stayed with you — write in. The best conversations begin with a single sentence.</p>
+            <form class="form" id="contact-form">
+              <div class="form-row">
+                <div class="field">
+                  <label for="c-name">Your name</label>
+                  <input type="text" id="c-name" placeholder="Full name" required autocomplete="off" />
+                </div>
+                <div class="field">
+                  <label for="c-email">Email address</label>
+                  <input type="email" id="c-email" placeholder="you@email.com" required autocomplete="off" />
+                </div>
+              </div>
+              <div class="field">
+                <label for="c-subject">Subject</label>
+                <input type="text" id="c-subject" placeholder="What's this about?" autocomplete="off" />
+              </div>
+              <div class="field">
+                <label for="c-message">Message</label>
+                <textarea id="c-message" placeholder="Write here…" required></textarea>
+              </div>
+              <div><button type="submit" class="btn-dark">Send message</button></div>
+            </form>
+            <div class="form-success" id="form-success">
+              <strong>Message sent.</strong>
+              <span>Thank you for reaching out. Every message is read.</span>
+            </div>
+          </div>
+
+          <aside class="contact-aside">
+            <div class="pen-card">
+              <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.3">
+                <path d="M34 5L39 10L16 33L7 37L11 28L34 5Z"/>
+                <path d="M30 9L35 14"/>
+                <path d="M7 37L11 28"/>
+              </svg>
+              <p>"The best conversations begin with a single, honest sentence."</p>
+            </div>
+            <div class="info-card">
+              <h3>Email</h3>
+              <p><a href="mailto:annaabraham2311@gmail.com">annaabraham2311@gmail.com</a></p>
+            </div>
+            <div class="info-card">
+              <h3>Instagram</h3>
+              <p><a href="https://instagram.com/thiswasonceinfrontofme" target="_blank" rel="noopener">@thiswasonceinfrontofme</a></p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-brand"><h2>Anna Abraham</h2><p>A personal record of small things noticed.</p></div>
+        <div class="footer-col"><h4>Pages</h4><ul><li><button onclick="navigate('home')">Home</button></li><li><button onclick="navigate('about')">About</button></li><li><button onclick="navigate('blog')">Blog</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div>
+        <div class="footer-col"><h4>Info</h4><ul><li><button style="cursor:default">Est. 2025</button></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2025 Anna Abraham. All rights reserved.</span><span>Written with love.</span></div>
+    </footer>
+  </div>
+
+  <script>
+    /* ── Router ── */
+    let currentView = 'home';
+    let currentPostId = null;
+
+    function navigate(view, postId) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+
+      currentView = view;
+      document.getElementById('view-' + view).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      const navBtn = document.getElementById('nav-' + view);
+      if (navBtn) navBtn.classList.add('active');
+
+      if (view === 'home')    renderHome();
+      if (view === 'blog')    renderBlog();
+      if (view === 'post')    renderPost(postId);
+      if (view === 'contact') resetContact();
+    }
+
+    /* ── Render home posts ── */
+    function renderHome() {
+      const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+      const grid  = document.getElementById('home-posts-grid');
+      grid.innerHTML = '';
+
+      if (posts.length === 0) {
+        grid.innerHTML = `<div class="empty-state"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#bbb" stroke-width="1.2"><rect x="7" y="4" width="26" height="32" rx="2"/><path d="M13 13h14M13 19h14M13 25h9"/></svg><p>No posts yet. Check back soon.</p></div>`;
+        return;
+      }
+
+      posts.slice().reverse().slice(0, 3).forEach((post, i) => {
+        const idx  = posts.length - 1 - i;
+        const card = document.createElement('div');
+        card.className = 'post-card';
+        card.innerHTML = `
+          <span class="pc-date">${new Date(post.date).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</span>
+          <h3 class="pc-title">${post.title}</h3>
+          <p class="pc-excerpt">${post.body.slice(0,120)}${post.body.length>120?'…':''}</p>
+          <span class="pc-read">Read more →</span>`;
+        card.addEventListener('click', () => navigate('post', idx));
+        grid.appendChild(card);
+      });
+    }
+
+    /* ── Render blog list ── */
+    function renderBlog() {
+      const posts   = JSON.parse(localStorage.getItem('posts') || '[]');
+      const list    = document.getElementById('blog-list');
+      const countEl = document.getElementById('blogs-count');
+
+      countEl.textContent = posts.length + (posts.length === 1 ? ' post' : ' posts');
+      list.innerHTML = '';
+
+      if (posts.length === 0) {
+        list.innerHTML = `<div style="padding:72px 0;text-align:center"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="#bbb" stroke-width="1.2" style="margin:0 auto 16px"><rect x="8" y="4" width="28" height="36" rx="3"/><path d="M15 14h14M15 20h14M15 26h9"/></svg><p style="font-family:var(--serif);font-size:1.1rem;font-style:italic;color:var(--muted)">Nothing here yet.</p></div>`;
+        return;
+      }
+
+      posts.slice().reverse().forEach((post, i) => {
+        const idx   = posts.length - 1 - i;
+        const words = post.body.trim().split(/\s+/).length;
+        const mins  = Math.max(1, Math.round(words / 200));
+        const entry = document.createElement('div');
+        entry.className = 'blog-entry';
+        entry.innerHTML = `
+          <span class="be-num">${String(i+1).padStart(2,'0')}</span>
+          <div>
+            <p class="be-date">${new Date(post.date).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})} &nbsp;·&nbsp; ${mins} min read</p>
+            <h2 class="be-title">${post.title}</h2>
+            <p class="be-excerpt">${post.body.slice(0,170)}${post.body.length>170?'…':''}</p>
+          </div>
+          <span class="be-arrow">→</span>`;
+        entry.addEventListener('click', () => navigate('post', idx));
+        list.appendChild(entry);
+      });
+    }
+
+    /* ── Render post ── */
+    function renderPost(id) {
+      currentPostId = id;
+      const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+      const post  = posts[id];
+      const root  = document.getElementById('post-root');
+
+      if (!post) {
+        root.innerHTML = `<div class="container" style="padding:80px 0;text-align:center"><p style="font-family:var(--serif);font-size:1.2rem;font-style:italic;color:var(--muted)">Post not found.</p></div>`;
+        return;
+      }
+
+      document.title = post.title + ' — Anna Abraham';
+      const words    = post.body.trim().split(/\s+/).length;
+      const mins     = Math.max(1, Math.round(words / 200));
+      const bodyHtml = '<p>' + post.body.replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>') + '</p>';
+      const prevId   = id > 0 ? id - 1 : null;
+      const nextId   = id < posts.length - 1 ? id + 1 : null;
+
+      root.innerHTML = `
+        <div class="post-header">
+          <div class="container">
+            <button class="post-back" onclick="navigate('blog')">
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2L4 6.5 9 11"/></svg>
+              All posts
+            </button>
+            <div class="post-chips">
+              <span class="chip">${new Date(post.date).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</span>
+              <span class="chip">${mins} min read</span>
+              <span class="chip">${words} words</span>
+            </div>
+            <h1 class="post-h1">${post.title}</h1>
+            ${post.subtitle ? `<p class="post-subtitle">${post.subtitle}</p>` : ''}
+          </div>
+        </div>
+        <div class="container">
+          <div class="post-layout">
+            <article class="post-body">${bodyHtml}</article>
+            <aside class="post-sidebar">
+              <div class="post-sidebar-card">
+                <h4>About this post</h4>
+                <p>Published ${new Date(post.date).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}.<br><br>${words} words · ${mins} min read.</p>
+              </div>
+              <div class="post-sidebar-card">
+                <h4>Written by</h4>
+                <p>Anna Abraham<br><br><button onclick="navigate('about')" style="font-size:0.78rem;font-weight:600;text-decoration:underline;text-underline-offset:3px;background:none;border:none;cursor:pointer;font-family:var(--sans);color:var(--ink);padding:0">About the author →</button></p>
+              </div>
+              <div style="background:var(--bg-warm);border:1px solid var(--rule);border-radius:8px;padding:20px;position:relative;overflow:hidden">
+                <div style="position:absolute;top:0;left:34px;width:1px;height:100%;background:#dcc8f0;opacity:0.4"></div>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#aaa" stroke-width="1.1" style="margin-bottom:10px;opacity:0.7"><path d="M15 2L18 5L7 16L2 18L4 13L15 2Z" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 4L16 7" stroke-linecap="round"/></svg>
+                <div style="height:1px;background:var(--rule-lt);margin-bottom:10px"></div>
+                <div style="height:1px;background:var(--rule-lt);width:78%;margin-bottom:10px"></div>
+                <div style="height:1px;background:var(--rule-lt);width:58%;margin-bottom:10px"></div>
+                <div style="height:1px;background:var(--rule-lt);width:88%"></div>
+              </div>
+            </aside>
+          </div>
+          <div class="post-nav-row">
+            <button class="post-nav-btn" onclick="${prevId!==null?`navigate('post',${prevId})`:'void(0)'}" style="visibility:${prevId!==null?'visible':'hidden'}">← Previous</button>
+            <button class="post-nav-btn" onclick="${nextId!==null?`navigate('post',${nextId})`:'void(0)'}" style="visibility:${nextId!==null?'visible':'hidden'}">Next →</button>
+          </div>
+        </div>`;
+    }
+
+    /* ── Contact form ── */
+    function resetContact() {
+      const form    = document.getElementById('contact-form');
+      const success = document.getElementById('form-success');
+      form.style.display    = '';
+      success.style.display = 'none';
+      form.reset();
+    }
+
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      this.style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    });
+
+    /* ── Seed posts ── */
+    (function seedPosts() {
+      let posts = JSON.parse(localStorage.getItem('posts') || '[]');
+
+      // Remove any test / placeholder posts
+      posts = posts.filter(p => {
+        const t = p.title.toLowerCase().trim();
+        return t !== 'test' && t !== 'test 1' && t !== 'test1' && t !== 'untitled';
+      });
+
+      const catalogue = [
+        {
+          title:    'Three Minutes on a Sunday',
+          subtitle: 'On a Sunday afternoon, a soap bubble taught me something about attention.',
+          date:     '2025-06-08',
+          body:     `On a Sunday afternoon, a soap bubble taught me something about attention.
+
+There is a particular kind of Sunday afternoon that asks nothing of you. No urgent emails, no pressing deadlines, just the quiet, almost meditative rhythm of doing the dishes. That was the afternoon I found myself at the kitchen sink, working through a small pile, having just put on Taylor Swift's Love Story.
+
+Properly listening, for once. I picked up the next dish, reached for the liquid soap to top up my sponge, and two small bubbles rose from the neck of the bottle, the way they always do, unhurried and unremarkable.
+
+One of them broke immediately. Popped without ceremony, without an audience, without even a sound I could register. Gone.
+
+The other one didn't.
+
+It just floated. Upward, then sideways, catching the light the way only a soap bubble can, holding an entire spectrum of colour inside something that weighs absolutely nothing. I noticed it the way you notice a stranger doing something quietly extraordinary on the street. Reluctantly. As if paying attention might break the spell.
+
+I put the sponge down.
+
+The bubble drifted past the tap, veered slightly left, hung near the window where the afternoon light came in at a low angle. Behind me, Taylor Swift was somewhere in the middle of her ballad, Romeo, save me, they're trying to tell me how to feel, and I was standing at my kitchen sink watching a soap bubble like it was the only thing happening in the world.
+
+Because, in that moment, it was.
+
+I blew on it, gently. It travelled further than I expected, obedient and buoyant, entirely unbothered by the fact that it was made of nothing. It dipped once, as if considering giving up, and then rose again.
+
+A soap bubble does not know it is temporary. It does not brace for its own ending. It simply exists, completely and without apology, until it doesn't.
+
+I watched it navigate the kitchen air like it had somewhere to be.
+
+The song wound towards its end. You'll never have to be alone, I love you and that's all I really know…
+
+And then, without drama, without warning, the bubble drifted down to the countertop and burst.
+
+Just like that. Three minutes, finished.
+
+There was a small laugh that came out of me, involuntary, amused and a little sad all at once, the specific feeling of watching something beautiful end on its own terms. Not popped. Not interrupted. Just done.
+
+I think about how close I came to missing it entirely. One less second of attention and it would have floated out of my periphery, burst somewhere I wasn't looking, and the whole thing would have happened without a single witness.
+
+But I looked. And because I looked, an ordinary Sunday afternoon became something I am still carrying around with me.
+
+We walk past so much. We half-watch, half-listen, half-exist in the rooms we are standing in. And all the while the world is quietly staging these tiny, fleeting things, not to teach us a lesson, not to be written about, just because that is what the world does. It keeps producing second bubbles. The ones that don't break straight away. The ones that are simply waiting to find out whether you'll bother to look up.
+
+Look up.`
+        },
+        {
+          title:    'The Pigeon That Had Other Plans',
+          subtitle: 'A rescue mission, a pair of surgical gloves, and absolutely no gratitude.',
+          date:     '2025-06-09',
+          body:     `I came back from outside, turned the key, pushed open the main door, and heard it immediately. A frantic, irregular fluttering coming from somewhere inside the house. I listened, looked deeper into the hallway, and there it was, a large pigeon in the kitchen, pressed against the window, beating its wings in that desperate, senseless way birds do when they have completely lost their composure.
+
+I should say upfront that I am not good with birds. I can pet a dog without a second thought, sit with a cat for hours, feel entirely at ease around most animals. But a bird? Something about the unpredictability of wings, the complete absence of any readable expression, leaves me genuinely at a loss.
+
+This was going to be a long afternoon.
+
+I walked into the kitchen and stopped. The room told the full story of its panic. Tiny plants knocked into the sink, photographs scattered, the kind of quiet domestic wreckage that only something desperately and blindly fluttering for a long time could leave behind.
+
+I slid open the right side of the window, stepped back, and waited for it to do the obvious thing. The sensible thing. The thing that required no further involvement from me whatsoever.
+
+The pigeon did not move.
+
+It stood at the glass and stared out at freedom with the glazed, bewildered expression of someone who had entirely forgotten what they came in for. It seemed to have no memory of the back door, which was wide open and roughly three feet to its right, and no interest in the window I had just helpfully opened. It simply stood there, blinking, as if the concept of exit had never once occurred to it.
+
+I went to my room. I put on the surgical gloves.
+
+Mama is so ready, baby. Let's get you out.
+
+My plan was simple. I would gently shoo the pigeon towards the second kitchen, where the back door stood wide open to the garden, and it would fly out, and that would be that. A clean operation. In and out. Minimal contact.
+
+It hopped along the countertop in the right general direction, made it all the way to the end, stood within clear view of the open back door with literally nothing between itself and the outside world, paused for a few long, contemplative minutes, weighed its options carefully, and then turned and walked deliberately into the second kitchen, shat on the countertop near the air fryer, and looked thoroughly unbothered about the whole thing.
+
+I took a breath.
+
+Right. No more negotiating.
+
+I moved towards it slowly, hands outstretched, trying to project a calm I absolutely did not feel. The moment my hands got close, it erupted into a chaos of wings, all noise and movement and zero cooperation, and I lurched back with considerably less dignity than I had hoped to maintain.
+
+Second attempt. Same result.
+
+On the third try, something shifted. Maybe it had exhausted itself. Maybe it sensed, finally, that I was not a threat. Maybe it simply ran out of options. Whatever the reason, it stilled just long enough for me to cup my gloved hands around it, feel the extraordinary lightness of it, all hollow bones and fast heartbeat, and carry it to the back door.
+
+I opened my hands.
+
+It flew out into the garden air, and for one brief moment it was exactly like releasing a caged bird, wings catching light, suddenly and completely free.
+
+I stood there feeling rather heroic.
+
+The pigeon landed on the garden wall and did not move.
+
+It sat there for a very long time, feathers slightly ruffled, staring at the middle distance with the thousand-yard look of someone who had been through something. No flutter of relief. No graceful arc into the sky. Just a small, traumatised bird, sitting very still, processing its afternoon.
+
+I watched it from the doorway, surgical gloves still on, feeling the particular mix of pride and helplessness that comes with having rescued something that does not quite look rescued yet.
+
+It never did fly away while I was watching. Eventually I went back inside, peeled off the gloves, and washed down the countertop.
+
+The heroism of it all, completely unacknowledged.
+
+A thank you would have been the least it could do.`
+        },
+        {
+          title:    'The Man Who Loved His Pizza',
+          subtitle: 'Some things in life are worth staying awake for.',
+          date:     '2025-06-10',
+          body:     `I was in the last seat on the bus, watching the world get on and off, when he appeared.
+
+He was probably in his late forties, unhurried, the kind of man who has long stopped caring about what anyone thinks of him, which is to say, the most interesting kind. But it was not him that caught my attention first. It was what he was carrying.
+
+A pizza box.
+
+Fresh, well packed, held with the specific two-handed reverence you reserve for things that genuinely matter. He navigated the aisle with the focused caution of someone carrying either a newborn or a soufflé, found the other end of my seat, and sat down with the careful, deliberate movements of a man who had clearly requested extra cheese and was not about to let the journey undo that decision.
+
+He settled in. The pizza sat on his lap, perfectly level.
+
+All was well.
+
+I watched him, not obviously, the way you watch people on public transport, through peripheral vision and the occasional glance. He was attentive to that box in a way that most people are not attentive to anything. Every bump in the road registered on his face. Every sharp turn earned a subtle adjustment of the hands. This was not a man transporting a pizza. This was a man escorting one.
+
+And then, somewhere between one stop and the next, his head dipped.
+
+His eyes closed.
+
+The pizza, sensing its moment, slid off his lap and hit the floor of the bus.
+
+A bus floor is nobody's friend.
+
+The pizza had already won.
+
+He woke with the particular jolt of someone who knows immediately and completely what they have done. His eyes went straight to the floor. He picked the box up, checked it, held it level again, and sat very upright for the remainder of the journey.
+
+He did not doze off again.
+
+He got off two stops later, box in hand, walking with the same careful deliberateness he had arrived with. A little wiser, perhaps. A little more vigilant.
+
+I hope the cheese was still good.
+
+I really do.`
+        },
+        {
+          title:    'The Independent Gentleman',
+          subtitle: 'Some dogs have places to be.',
+          date:     '2025-06-11',
+          body:     `I have seen the memes. We all have. The ones where a dog bites its own lead and marches ahead of its owner with the energy of someone who has simply had enough of being managed. They are funny on a screen, the kind of thing you send to three people and forget about by the evening.
+
+Nothing prepared me for seeing it in real life.
+
+I was on the bus, watching a busy junction do its usual thing, people crossing, cars waiting, the ordinary organised chaos of a city going about its afternoon. And then, moving through the crowd with complete and total confidence, I saw him.
+
+A golden retriever.
+
+Lead in mouth, held firmly between his teeth like a businessman gripping a briefcase, making his way through the junction at his own pace, in his own direction, entirely unbothered by the world around him. No hesitation. No looking back. Just a golden retriever with somewhere to be and a very clear sense of how he intended to get there.
+
+The crowd parted for him, as crowds should.
+
+I was still processing this when I noticed something behind him.
+
+An owner.
+
+Following. Several paces back, doing absolutely nothing to intervene, with the quiet resignation of someone who has long since accepted that they are not the one in charge on these walks. Not leading, not redirecting, just accompanying. A plus one. Moral support at best.
+
+The dog did not look back once.
+
+I laughed out loud on that bus, the sudden, involuntary kind that earns you glances from the people around you and that you cannot even begin to explain. Because the thing about seeing it in real life, as opposed to a screen, is that the internet cannot capture the full dignity of it. The posture. The absolute conviction. The way that dog moved through a crowded junction like he had been doing this his entire life and found it frankly beneath him to be questioned about it.
+
+Some dogs carry themselves like they know something the rest of us don't.
+
+That golden retriever knew everything.`
+        },
+        {
+          title:    'The Boy with the Taxi',
+          subtitle: 'Some people on buses have not yet learned to smile back.',
+          date:     '2025-06-20',
+          body:     `I noticed the boy first.
+
+He was standing in the aisle with a small yellow taxi in both hands, holding it with the particular pride of someone who has recently acquired something very important.
+
+Then I noticed his mother.
+
+Pregnant, a long curtain rod held at a slant, a grocery trolley trailing behind her, and a bus card somewhere at the bottom of her bag, which she located after a search conducted entirely under pressure while the queue behind her waited with the particular patience of people who are not feeling particularly patient. She tapped, she gathered herself, she moved down the aisle and found a seat. She slanted the rod into the buggy space in front of her and settled the trolley beside her. And then she lifted the boy onto her lap, and the boy, freed from the logistics of boarding, returned immediately to the only thing that had ever mattered.
+
+The taxi.
+
+It was small and yellow, the kind with buttons along the roof that produce siren sounds at a volume specifically engineered to test adults. He held it with both hands and turned slightly in his mother's lap, making sure the passengers around him were aware of what he had.
+
+They were not responding in the way he deserved.
+
+The people on the seats nearest to him sat with the blank, forward-facing expressions of commuters who have decided that the bus is not a place where things happen to them. The boy looked at one face, then another, then another. He pressed the siren button. The taxi made its noise. He smiled at them anyway.
+
+I found myself genuinely annoyed on his behalf. He was a small child on a bus with a taxi and a working siren. The bar for engagement was not high. I wondered, and I am not proud of wondering it, whether they would have smiled more readily if he had looked different.
+
+His mother adjusted her bag, shifted her weight, rested her hand on his back. The boy beamed at no one in particular.
+
+When the bus stopped, the taxi slipped from his hands and hit the floor. I felt the weight of it land somewhere in my chest too. He climbed down from his mother's lap, picked it up, and held it closer this time.
+
+Some children have not yet learned that strangers on buses don't smile back. I hope it takes him a long time to figure that out.`
+        },
+        {
+          title:    'The Gardener, the Dog, and the Road I Didn\'t Have to Cross',
+          subtitle: 'A minute\'s walk. A busy road. A very contingent plan to be a hero.',
+          date:     '2025-06-13',
+          body:     `I was at the bus stop on a Wednesday afternoon when the old man in the garden lost his balance and my entire plan for the day quietly rearranged itself.
+
+He was in the garden of the house across the road. The house sits on a slope, and he was crouched over, pulling at the grass along the edge of a flower bed. He looked to be in his mid-nineties, though I could be off by a decade in either direction, because age does something strange to people at that end of life. He was thin and deliberate in his movements, pulling one fistful at a time, and his legs were trembling in the quiet, stubborn way that legs do when they have been carrying someone for ninety-odd years and are beginning to negotiate terms.
+
+I had seen him before. A few days ago, wheeling his bin out to the kerb, his little cockapoo watching from the window like a small, furry magistrate overseeing proceedings. There is something about a dog in a window that is deeply settling. They always look like they are keeping track.
+
+Today, when he lost his balance slightly and caught himself, he looked up at the window. The dog was there. He smiled.
+
+But then he wobbled again, more significantly this time, and my chest did something involuntary.
+
+I started doing the maths. His garden sits on a slope. The house is on the other side of Airport Road, which does not get its name from being a quiet, pedestrian-friendly lane. It is a fast road, a busy road, the sort of road that makes you feel foolish for merely looking at it too long. The bus stop placed me a solid minute's walk from his gate, factoring in the crossing. If I jaywalked across that road in a panic, I was going to end up being the patient rather than the concerned bystander, and the ambulance team was not going to appreciate the irony.
+
+I had a meeting. I began composing the subject line in my head: Running late, helping an elderly gentleman, will explain. I pictured the sprint, the crossing, the slope, the arrival, the being entirely useless but visibly present. By the time I had worked out whether I should call 999 before or after crossing the road, the bus had still not arrived and the man had wobbled again.
+
+Then a hand appeared at the window, scratching gently behind the cockapoo's ears.
+
+A hand. A second person. Someone is home.
+
+The man kept working, methodical and unhurried, doing exactly what he wanted to be doing on a Wednesday afternoon in his own garden. The dog stayed at the window. My bus arrived.
+
+He was still pulling at the grass when we turned towards the city and I lost sight of him. Still entirely himself.`
+        },
+        {
+          title:    'The Bus Full of Weddings',
+          subtitle: 'Not everything that looks like a love story is one.',
+          date:     '2025-06-12',
+          body:     `I tapped my bus card, turned toward the aisle, and walked straight into what appeared to be a wedding.
+
+Not the venue, not the reception, not even the after-party. The bus. A perfectly ordinary city bus, on a perfectly ordinary day, packed from front to back with people dressed in the most extraordinary clothes. Suits, gowns, fascinators, the works. And right there, directly in my eyeline as I turned from the reader, a bride and groom.
+
+Freshly married, or so I thought.
+
+The bride's dress had a deep neckline, and the groom was discreetly trying to fix it. Some gestures do not come with explanations. I turned from the card reader at exactly that moment and our eyes met.
+
+He straightened up immediately and said sorry. Not because what he was doing was inappropriate, quite the opposite, but because the timing made it look like he had done it precisely as I appeared, as if adjusting it for an audience of one. He did not want me to feel uncomfortable, or worse, like I had caused it. It was a small, considerate thing to do. The kind of social grace most people do not bother with.
+
+I said it's okay and found a seat.
+
+Once seated, the full picture of the bus came into focus. Beautiful people in beautiful clothes, every shade of formal, every variation of dressed up, buzzing with the kind of energy that only exists when a group of people are collectively going somewhere good. My first instinct was wedding guests, a big celebration somewhere, and they had all piled onto the bus together the way wedding parties sometimes do.
+
+I leaned over to the guy sitting next to me.
+
+"Are you all coming back from a wedding?"
+
+He smiled. Not a wedding, he said. A horserace. One with a theme, where everyone dressed as though they were attending one, brides and grooms and bridesmaids and guests, the whole occasion costumed and deliberate and apparently a great deal of fun.
+
+I sat with that for a moment. A bus full of pretend weddings, heading toward a racetrack, on an ordinary afternoon. The city, doing what the city does.
+
+When he got up to leave, he turned and wished me a good day, the genuine kind, not the automatic kind. I wished him the best day, told him to enjoy the event, and meant every word of it.
+
+Then the bus emptied. People streamed down from the upper deck, gowns and suits filling the aisle all at once, fascinators bobbing, the whole beautiful crowd filing out onto the street in one long, unhurried procession. For a moment it looked less like a bus stop and more like the end of a ceremony.
+
+And then they were gone, and it was just a bus again.`
+        }
+      ];
+
+      // Upsert each post — add if missing, update subtitle if already there
+      catalogue.forEach(entry => {
+        const idx = posts.findIndex(p => p.title === entry.title);
+        const obj = { title: entry.title, subtitle: entry.subtitle, body: entry.body, date: new Date(entry.date).toISOString() };
+        if (idx === -1) posts.push(obj);
+        else posts[idx] = obj; // refresh so subtitle is always current
+      });
+
+      localStorage.setItem('posts', JSON.stringify(posts));
+    })();
+
+    /* ── Boot ── */
+    navigate('home');
+  </script>
+
+</body>
+</html>
