@@ -6,31 +6,32 @@
   <title>Anna Abraham</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black:    #111111;
-      --ink:      #222222;
-      --soft:     #444444;
-      --muted:    #888888;
-      --rule:     #e0ddd8;
-      --rule-lt:  #eeebe6;
-      --bg:       #faf9f6;
-      --bg-warm:  #f4f1eb;
-      --white:    #ffffff;
-      --serif:    'Playfair Display', Georgia, serif;
-      --sans:     'Inter', -apple-system, sans-serif;
-      --ease:     cubic-bezier(0.4, 0, 0.2, 1);
-      --max:      1080px;
-      --pad:      clamp(20px, 5vw, 60px);
+      --black:   #231d17;
+      --ink:     #2b2620;
+      --soft:    #8a7d6a;
+      --muted:   #a3937a;
+      --rule:    #E4DBCB;
+      --rule-lt: #EBE3D3;
+      --bg:      #F4EFE6;
+      --bg-warm: #F1E9DB;
+      --white:   #ffffff;
+      --accent:  #3f5b46;
+      --serif:   'Spectral', Georgia, serif;
+      --mono:    'IBM Plex Mono', monospace;
+      --ease:    cubic-bezier(0.4, 0, 0.2, 1);
+      --max:     1000px;
+      --pad:     clamp(20px, 5vw, 40px);
     }
 
     html { font-size: 16px; scroll-behavior: smooth; }
 
     body {
-      font-family: var(--sans);
+      font-family: var(--serif);
       background: var(--bg);
       color: var(--ink);
       min-height: 100vh;
@@ -40,47 +41,45 @@
     }
 
     a { color: inherit; text-decoration: none; }
+    ::selection { background: #e3d8c1; }
 
     /* ── NAV ── */
     .nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(250,249,246,0.93);
-      backdrop-filter: blur(16px);
+      background: rgba(244,239,230,0.92);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--rule);
     }
 
     .nav-inner {
       max-width: var(--max); margin: 0 auto;
-      padding: 0 var(--pad); height: 66px;
+      padding: 0 var(--pad); height: 64px;
       display: flex; align-items: center; justify-content: space-between;
     }
 
     .nav-logo {
-      font-family: var(--serif); font-size: 1.2rem;
-      font-weight: 600; color: var(--black); letter-spacing: -0.01em;
-      cursor: pointer;
+      font-family: var(--serif); font-size: clamp(12.5px,3.4vw,15px);
+      font-weight: 500; letter-spacing: clamp(0.04em,1vw,0.16em);
+      text-transform: uppercase; color: var(--black); cursor: pointer;
     }
 
-    .nav-links { display: flex; align-items: center; gap: 2.2rem; }
+    .nav-links { display: flex; align-items: center; gap: clamp(11px,2.6vw,30px); }
 
     .nav-links button {
       background: none; border: none; cursor: pointer;
-      font-family: var(--sans); font-size: 0.82rem; font-weight: 500;
-      letter-spacing: 0.02em; color: var(--muted);
-      padding: 0; position: relative;
-      transition: color 0.2s var(--ease);
+      font-family: var(--serif); font-size: clamp(10px,2.7vw,12px);
+      font-weight: 400; letter-spacing: clamp(0.05em,1.4vw,0.14em);
+      text-transform: uppercase; color: var(--muted);
+      padding: 2px 0; position: relative; transition: color 0.2s;
     }
 
-    .nav-links button::after {
-      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
-      height: 1.5px; background: var(--black);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.25s var(--ease);
-    }
-
-    .nav-links button:hover,
+    .nav-links button:hover { color: var(--black); }
     .nav-links button.active { color: var(--black); }
-    .nav-links button.active::after { transform: scaleX(1); }
+    .nav-links button.active::after {
+      content: ''; position: absolute; bottom: -7px;
+      left: 50%; transform: translateX(-50%);
+      height: 1.5px; width: 16px; background: var(--accent);
+    }
 
     /* ── VIEWS ── */
     .view { display: none; flex: 1; flex-direction: column; animation: fadeUp 0.35s var(--ease) both; }
@@ -91,581 +90,298 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── SHARED ── */
-    .container { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
-
-    .page-hero {
-      padding: 68px 0 56px;
-      border-bottom: 1px solid var(--rule);
-    }
-
-    .page-hero .tag {
-      font-size: 0.68rem; font-weight: 600;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--muted); display: block; margin-bottom: 12px;
-    }
-
-    .page-hero h1 {
-      font-family: var(--serif);
-      font-size: clamp(2.2rem, 5vw, 3.6rem);
-      font-weight: 700; letter-spacing: -0.025em;
-      line-height: 1.1; color: var(--black); margin-bottom: 14px;
-    }
-
-    .page-hero p {
-      font-size: 1rem; line-height: 1.75;
-      color: var(--soft); max-width: 500px; font-weight: 300;
-    }
-
-    /* ══════════════════════════════
-       HOME
-    ══════════════════════════════ */
-    .home-hero {
-      display: grid;
-      grid-template-columns: 1fr 380px;
-      gap: 72px;
-      align-items: center;
-      padding: 88px var(--pad) 80px;
+    /* ── PAGE HEADER (shared) ── */
+    .page-head { border-bottom: 1px solid var(--rule); }
+    .page-head-inner {
       max-width: var(--max); margin: 0 auto;
+      padding: 64px var(--pad) 52px; text-align: center;
+    }
+    .page-kicker {
+      font-family: var(--serif); font-size: 12px;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 18px; display: block;
+    }
+    .page-head h1 {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(28px,4.5vw,44px); line-height: 1.1;
+      letter-spacing: -0.01em; color: var(--black); margin: 0 auto 14px;
+    }
+    .page-head p {
+      font-family: var(--serif); font-style: italic;
+      font-size: 16px; color: var(--soft); margin: 0 auto; max-width: 44ch;
     }
 
-    .hero-eyebrow {
-      font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 20px;
-      display: flex; align-items: center; gap: 10px;
+    /* ── HOME ── */
+    .home-masthead {
+      max-width: 720px; margin: 0 auto;
+      padding: 72px var(--pad) 8px; text-align: center;
     }
-
-    .hero-eyebrow::before { content: none; }
-
-    .hero-h1 {
-      font-family: var(--serif);
-      font-size: clamp(2.6rem, 5vw, 4rem);
-      font-weight: 700; line-height: 1.1;
-      letter-spacing: -0.025em; color: var(--black); margin-bottom: 22px;
+    .masthead-rule {
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; margin-bottom: 18px;
     }
-
-    .hero-h1 em { font-style: italic; font-weight: 400; color: var(--soft); }
-
-    .hero-sub {
-      font-size: 1rem; line-height: 1.78;
-      color: var(--soft); max-width: 440px;
-      margin-bottom: 36px; font-weight: 300;
+    .masthead-rule span:not(.masthead-est) { height: 1px; width: 40px; background: #cdbfa6; display: block; }
+    .masthead-est {
+      font-family: var(--serif); font-size: 11px;
+      letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted);
     }
-
-    .btn-dark {
-      display: inline-flex; align-items: center; gap: 9px;
-      background: var(--black); color: var(--white);
-      font-size: 0.82rem; font-weight: 600;
-      letter-spacing: 0.04em; padding: 12px 26px;
-      border-radius: 5px; border: none; cursor: pointer;
-      font-family: var(--sans);
-      transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+    .masthead-name {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(28px,5vw,42px);
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--black); margin-bottom: 12px;
     }
-
-    .btn-dark:hover { opacity: 0.8; transform: translateY(-1px); }
-    .btn-dark svg   { transition: transform 0.2s var(--ease); }
-    .btn-dark:hover svg { transform: translateX(3px); }
-
-    /* Paper illustration */
-    .paper-card {
-      background: var(--white); border: 1px solid var(--rule);
-      border-radius: 10px; padding: 32px 28px 28px;
-      box-shadow: 0 12px 48px rgba(0,0,0,0.07), 0 2px 8px rgba(0,0,0,0.03);
-      position: relative; overflow: hidden;
+    .masthead-sub {
+      font-family: var(--serif); font-style: italic;
+      font-size: 17px; color: var(--soft); margin-bottom: 0;
     }
-
-    .paper-card::before {
-      content: ''; position: absolute;
-      top: 0; left: 48px; width: 1px; height: 100%;
-      background: #e4d4f4; opacity: 0.45;
+    .masthead-photo-wrap {
+      margin: 36px calc(-1 * var(--pad)) 0;
     }
-
-    .paper-pen-icon { margin-bottom: 18px; opacity: 0.3; }
-
-    .paper-lines { display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px; }
-
-    .pl { height: 1px; background: var(--rule-lt); border-radius: 1px; }
-    .pl.s  { width: 52%; }
-    .pl.m  { width: 76%; }
-    .pl.l  { width: 100%; }
-    .pl.xl { width: 87%; }
-
-    /* Latest posts */
-    .home-posts { padding: 60px 0 96px; border-top: 1px solid var(--rule); }
-
-    .home-posts-header {
-      display: flex; align-items: baseline;
-      justify-content: space-between; margin-bottom: 32px;
-    }
-
-    .section-title {
-      font-family: var(--serif); font-size: 1.8rem;
-      font-weight: 600; letter-spacing: -0.01em; color: var(--black);
-    }
-
-    .text-link {
-      font-size: 0.8rem; font-weight: 500; color: var(--muted);
-      display: inline-flex; align-items: center; gap: 6px;
-      background: none; border: none; cursor: pointer;
-      font-family: var(--sans);
-      transition: color 0.2s, gap 0.2s var(--ease);
-    }
-
-    .text-link:hover { color: var(--black); gap: 10px; }
-
-    .posts-grid {
-      display: grid; grid-template-columns: repeat(3,1fr);
-      gap: 1px; background: var(--rule-lt);
-      border: 1px solid var(--rule-lt); border-radius: 8px; overflow: hidden;
-    }
-
-    .post-card {
-      display: block; background: var(--bg);
-      padding: 28px 24px;
-      transition: background 0.2s var(--ease);
-      cursor: pointer;
-    }
-
-    .post-card:hover { background: var(--white); }
-
-    .pc-date {
-      font-size: 0.68rem; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--muted); display: block; margin-bottom: 10px;
-    }
-
-    .pc-title {
-      font-family: var(--serif); font-size: 1.1rem;
-      font-weight: 600; line-height: 1.35;
-      color: var(--black); margin-bottom: 8px; letter-spacing: -0.01em;
-    }
-
-    .pc-excerpt {
-      font-size: 0.82rem; line-height: 1.65;
-      color: var(--muted); margin-bottom: 16px;
-    }
-
-    .pc-read {
-      font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--soft); display: inline-flex;
-      align-items: center; gap: 5px;
-      transition: gap 0.2s var(--ease), color 0.2s;
-    }
-
-    .post-card:hover .pc-read { color: var(--black); gap: 9px; }
-
-    .empty-state {
-      grid-column: 1/-1; padding: 72px 24px;
-      text-align: center; background: var(--bg);
-    }
-
-    .empty-state svg { margin: 0 auto 16px; opacity: 0.2; }
-
-    .empty-state p {
-      font-family: var(--serif); font-size: 1.1rem;
-      font-style: italic; color: var(--muted);
-    }
-
-    /* ══════════════════════════════
-       ABOUT
-    ══════════════════════════════ */
-    .about-section { padding: 68px 0 96px; }
-
-    .about-photo {
-      width: 100%; max-width: 340px;
-      aspect-ratio: 3 / 4;
-      border-radius: 4px;
+    .masthead-photo {
+      width: 100%; max-height: 680px;
+      object-fit: cover; object-position: center;
       display: block;
-      margin: 0 0 36px 0;
-      object-fit: cover;
-      object-position: center center;
     }
 
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: 68px; align-items: start;
+    .home-blog-section {
+      max-width: 760px; margin: 0 auto; padding: 64px var(--pad) 0;
     }
-
-    .about-body p {
-      font-size: 0.97rem; line-height: 1.9;
-      color: var(--soft); margin-bottom: 1.5em; font-weight: 300;
-      text-align: justify;
+    .home-blog-label {
+      text-align: center; font-family: var(--serif);
+      font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
     }
-
-    .about-body p:first-child::first-letter {
-      font-family: var(--serif); font-size: 3.6rem;
-      font-weight: 700; line-height: 0.8;
-      float: left; margin: 0.06em 0.12em 0 0; color: var(--black);
+    .home-entry-list { border-bottom: 1px solid var(--rule-lt); }
+    .home-entry-row {
+      display: grid; grid-template-columns: 44px 1fr 24px;
+      gap: 20px; align-items: center;
+      padding: 22px 0; border-top: 1px solid var(--rule-lt);
+      cursor: pointer; transition: opacity 0.18s;
     }
-
-    .pull-quote {
-      border-left: 3px solid var(--black);
-      padding: 4px 0 4px 22px; margin: 32px 0;
+    .home-entry-row:hover { opacity: 0.62; }
+    .home-entry-arrow { font-family: var(--serif); color: var(--muted); font-size: 16px; }
+    .home-entry-body { display: flex; flex-direction: column; gap: 4px; }
+    .home-entry-num {
+      font-family: var(--serif); font-style: italic;
+      font-size: 24px; color: #c9b99e;
     }
-
-    .pull-quote blockquote {
-      font-family: var(--serif); font-size: 1.25rem;
-      font-style: italic; line-height: 1.5; color: var(--black);
+    .home-entry-title {
+      font-family: var(--serif); font-weight: 500;
+      font-size: 20px; color: var(--black); margin-bottom: 4px;
     }
-
-    .about-sidebar { display: flex; flex-direction: column; gap: 14px; }
-
-    .sidebar-card {
-      background: var(--white); border: 1px solid var(--rule);
-      border-radius: 8px; padding: 22px;
+    .home-entry-sub {
+      font-family: var(--serif); font-style: italic;
+      font-size: 15px; color: var(--soft); line-height: 1.5;
     }
-
-    .sidebar-card h3 {
-      font-size: 0.63rem; font-weight: 700;
+    .home-entry-date {
+      font-family: var(--mono); font-size: 11px;
       letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--muted); border-bottom: 1px solid var(--rule-lt);
-      padding-bottom: 9px; margin-bottom: 13px;
+      color: #a99a80; white-space: nowrap;
+    }
+    .home-blog-more { text-align: center; margin: 34px 0 0; padding-bottom: 80px; }
+    .home-blog-more button {
+      background: none; border: none; cursor: pointer;
+      font-family: var(--serif); font-size: 13px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--black); padding: 0; transition: letter-spacing 0.2s;
+    }
+    .home-blog-more button:hover { letter-spacing: 0.2em; }
+
+    /* ── ABOUT ── */
+    .about-prose {
+      max-width: 680px; margin: 0 auto; padding: 56px var(--pad) 88px;
+    }
+    .about-prose p {
+      font-family: var(--serif); font-size: 19px;
+      line-height: 1.88; color: var(--ink);
+      margin: 0 0 1.5em; text-align: justify;
+    }
+    .about-prose p:first-child::first-letter {
+      float: left; font-family: var(--serif);
+      font-weight: 600; font-size: 62px; line-height: 0.74;
+      color: var(--black); margin: 7px 12px 0 0;
+    }
+    .about-pull {
+      font-family: var(--serif); font-style: italic;
+      font-size: 24px; line-height: 1.42; color: var(--black);
+      text-align: center; margin: 44px auto; max-width: 24ch;
     }
 
-    .sidebar-card ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
-
-    .sidebar-card li {
-      font-size: 0.83rem; line-height: 1.5;
-      color: var(--soft); padding-left: 14px; position: relative;
+    /* ── BLOG LIST ── */
+    .journal-list-wrap {
+      max-width: 760px; margin: 0 auto; padding: 22px var(--pad) 88px;
+    }
+    .journal-list { border-bottom: 1px solid var(--rule-lt); }
+    .journal-entry {
+      display: grid; grid-template-columns: 52px 1fr;
+      gap: 20px; align-items: baseline;
+      padding: 28px 6px; border-top: 1px solid var(--rule-lt);
+      cursor: pointer; border-radius: 8px; transition: background 0.18s;
+    }
+    .journal-entry:hover { background: #FBF8F1; }
+    .je-num {
+      font-family: var(--serif); font-style: italic;
+      font-size: 28px; color: #c9b99e; line-height: 1;
+    }
+    .je-meta {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #a99a80; margin-bottom: 8px;
+    }
+    .je-title {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(21px,3vw,25px); line-height: 1.25;
+      color: var(--black); margin-bottom: 6px;
+    }
+    .je-sub {
+      font-family: var(--serif); font-style: italic;
+      font-size: 16px; color: var(--soft); line-height: 1.55;
     }
 
-    .sidebar-card li::before { content: '—'; position: absolute; left: 0; color: var(--rule); }
-
-    .notebook-card {
-      background: var(--bg-warm); border: 1px solid var(--rule);
-      border-radius: 8px; padding: 22px;
-      position: relative; overflow: hidden;
-    }
-
-    .notebook-card::before {
-      content: ''; position: absolute;
-      top: 0; left: 36px; width: 1px; height: 100%;
-      background: #dcc8f0; opacity: 0.5;
-    }
-
-    .nb { height: 1px; background: var(--rule); margin-bottom: 13px; border-radius: 1px; }
-    .nb.s  { width: 50%; }
-    .nb.m  { width: 74%; }
-    .nb.l  { width: 100%; }
-    .nb.xl { width: 86%; }
-
-    /* ══════════════════════════════
-       BLOG LIST
-    ══════════════════════════════ */
-    .blogs-section { padding: 52px 0 96px; }
-
-    .blogs-toolbar {
-      display: flex; align-items: center;
-      justify-content: space-between;
-      padding-bottom: 24px; border-bottom: 1px solid var(--rule);
-    }
-
-    .blogs-count {
-      font-size: 0.78rem; color: var(--muted); font-style: italic;
-    }
-
-    .blog-list { display: flex; flex-direction: column; }
-
-    .blog-entry {
-      display: grid;
-      grid-template-columns: 52px 1fr 30px;
-      gap: 22px; align-items: center;
-      padding: 26px 0;
-      border-bottom: 1px solid var(--rule-lt);
-      cursor: pointer;
-      border-radius: 6px;
-      transition: background 0.15s var(--ease), padding 0.15s var(--ease), margin 0.15s var(--ease);
-    }
-
-    .blog-entry:hover {
-      background: var(--white);
-      margin: 0 -20px; padding: 26px 20px;
-      border-color: transparent;
-    }
-
-    .be-num {
-      font-family: var(--serif); font-size: 1.7rem;
-      font-weight: 700; color: var(--rule-lt);
-      line-height: 1; text-align: right;
-    }
-
-    .be-date {
-      font-size: 0.68rem; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 5px;
-    }
-
-    .be-title {
-      font-family: var(--serif);
-      font-size: clamp(1.05rem, 2vw, 1.35rem);
-      font-weight: 600; line-height: 1.3;
-      letter-spacing: -0.01em; color: var(--black); margin-bottom: 5px;
-    }
-
-    .be-excerpt {
-      font-size: 0.82rem; line-height: 1.6;
-      color: var(--muted); font-weight: 300;
-    }
-
-    .be-arrow {
-      color: var(--rule); font-size: 1.1rem;
-      transition: color 0.15s, transform 0.2s var(--ease);
-    }
-
-    .blog-entry:hover .be-arrow { color: var(--black); transform: translateX(4px); }
-
-    /* ══════════════════════════════
-       POST VIEW
-    ══════════════════════════════ */
-    .post-header {
-      padding: 58px 0 44px;
+    /* ── POST ── */
+    .post-head {
+      max-width: 680px; margin: 0 auto;
+      padding: 52px var(--pad) 44px; text-align: center;
       border-bottom: 1px solid var(--rule);
     }
-
-    .post-back {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 28px;
-      background: none; border: none; cursor: pointer;
-      font-family: var(--sans);
-      transition: color 0.2s;
+    .post-kicker {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 16px; display: block;
     }
-
-    .post-back:hover { color: var(--black); }
-    .post-back svg   { transition: transform 0.2s var(--ease); }
-    .post-back:hover svg { transform: translateX(-3px); }
-
-    .post-chips {
-      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px;
+    .post-title {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(30px,5vw,46px); line-height: 1.12;
+      letter-spacing: -0.01em; color: var(--black);
+      margin: 0 auto 16px; max-width: 20ch;
     }
-
-    .chip {
-      font-size: 0.67rem; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--muted); background: var(--bg-warm);
-      border: 1px solid var(--rule); padding: 3px 10px; border-radius: 100px;
+    .post-deck {
+      font-family: var(--serif); font-style: italic;
+      font-size: 19px; line-height: 1.5; color: var(--soft);
+      margin: 0 auto; max-width: 40ch;
     }
-
-    .post-h1 {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 700; line-height: 1.12;
-      letter-spacing: -0.025em; color: var(--black); max-width: 700px;
-      margin-bottom: 14px;
+    .post-photo-placeholder {
+      height: 420px; background: var(--bg-warm);
+      border: 1.5px dashed var(--rule); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 44px auto 0; max-width: 860px;
     }
-
-    .post-subtitle {
-      font-family: var(--serif);
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      font-weight: 400; font-style: italic;
-      line-height: 1.5; color: var(--soft);
-      max-width: 640px;
+    .post-photo-placeholder span {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
     }
-
-    .post-layout {
-      display: grid;
-      grid-template-columns: 1fr 240px;
-      gap: 60px; align-items: start;
-      padding: 52px 0 96px;
+    .post-photo-wrap {
+      margin: 44px auto 0; max-width: 860px; padding: 0 var(--pad);
     }
-
-    .post-body {
-      font-size: 1.05rem; line-height: 1.95;
-      color: var(--soft); font-weight: 300;
+    .post-photo {
+      width: 100%; max-height: 560px;
+      object-fit: cover; object-position: center;
+      display: block; border-radius: 4px;
     }
-
-    .post-body p { margin-bottom: 1.6em; text-align: justify; }
-
+    .post-body-wrap {
+      max-width: 78ch; margin: 0 auto; padding: 56px var(--pad) 8px;
+    }
+    .post-body p {
+      font-family: var(--serif); font-size: 19px;
+      line-height: 1.92; color: var(--ink);
+      margin: 0 0 1.6em; text-align: justify;
+    }
     .post-body p:first-child::first-letter {
-      font-family: var(--serif); font-size: 3.8rem;
-      font-weight: 700; line-height: 0.78;
-      float: left; margin: 0.06em 0.12em 0 0; color: var(--black);
+      float: left; font-family: var(--serif);
+      font-weight: 600; font-size: 64px; line-height: 0.74;
+      color: var(--black); margin: 8px 12px 0 0;
     }
-
-    .post-sidebar { position: sticky; top: 80px; display: flex; flex-direction: column; gap: 12px; }
-
-    .post-sidebar-card {
-      background: var(--white); border: 1px solid var(--rule);
-      border-radius: 8px; padding: 20px;
+    .post-nav {
+      max-width: 78ch; margin: 40px auto 0;
+      padding: 24px var(--pad) 88px; border-top: 1px solid var(--rule-lt);
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
     }
-
-    .post-sidebar-card h4 {
-      font-size: 0.62rem; font-weight: 700;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 9px;
-      padding-bottom: 8px; border-bottom: 1px solid var(--rule-lt);
-    }
-
-    .post-sidebar-card p {
-      font-size: 0.82rem; line-height: 1.65; color: var(--soft);
-    }
-
-    .post-nav-row {
-      display: flex; justify-content: space-between;
-      padding: 22px 0; border-top: 1px solid var(--rule-lt);
-    }
-
     .post-nav-btn {
-      font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--muted); background: none; border: none;
-      cursor: pointer; font-family: var(--sans);
-      transition: color 0.2s;
+      background: none; border: none; cursor: pointer;
+      font-family: var(--serif); font-size: 12px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--soft); padding: 0; transition: color 0.2s;
     }
-
     .post-nav-btn:hover { color: var(--black); }
+    .post-nav-center { color: var(--accent); }
 
-    /* ══════════════════════════════
-       CONTACT
-    ══════════════════════════════ */
-    .contact-section { padding: 52px 0 96px; }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 360px;
-      gap: 68px; align-items: start;
+    /* ── CONTACT ── */
+    .contact-cards {
+      max-width: 520px; margin: 0 auto; padding: 44px var(--pad) 88px;
     }
-
-    .contact-intro {
-      font-size: 0.95rem; line-height: 1.8;
-      color: var(--soft); margin-bottom: 30px; font-weight: 300;
+    .contact-quote-card {
+      background: var(--bg-warm); border: 1px solid var(--rule);
+      border-radius: 10px; padding: 28px; text-align: center; margin-bottom: 14px;
     }
-
-    .form { display: flex; flex-direction: column; gap: 18px; }
-
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-    .field { display: flex; flex-direction: column; gap: 6px; }
-
-    .field label {
-      font-size: 0.69rem; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase; color: var(--soft);
+    .contact-quote-card p {
+      font-family: var(--serif); font-style: italic;
+      font-size: 17px; line-height: 1.6; color: #5b4a38;
     }
-
-    .field input, .field textarea {
-      font-family: var(--sans); font-size: 0.9rem;
-      background: var(--white); border: 1.5px solid var(--rule);
-      border-radius: 5px; padding: 10px 13px;
-      color: var(--ink); outline: none;
-      transition: border-color 0.2s var(--ease); width: 100%;
+    .contact-info-card {
+      border: 1px solid var(--rule); border-radius: 10px;
+      padding: 22px; margin-bottom: 14px;
     }
-
-    .field input:focus, .field textarea:focus { border-color: var(--black); }
-    .field textarea { resize: vertical; min-height: 130px; }
-
-    .contact-aside { display: flex; flex-direction: column; gap: 12px; }
-
-    .info-card {
-      background: var(--white); border: 1px solid var(--rule);
-      border-radius: 8px; padding: 22px;
-    }
-
-    .info-card h3 {
-      font-size: 0.63rem; font-weight: 700;
-      letter-spacing: 0.14em; text-transform: uppercase;
+    .contact-info-card h3 {
+      font-family: var(--serif); font-size: 11px;
+      letter-spacing: 0.16em; text-transform: uppercase;
       color: var(--muted); margin-bottom: 9px;
       padding-bottom: 8px; border-bottom: 1px solid var(--rule-lt);
     }
-
-    .info-card p {
-      font-size: 0.85rem; line-height: 1.7; color: var(--soft);
+    .contact-info-card a {
+      font-family: var(--serif); font-size: 16px;
+      color: var(--black); transition: color 0.2s;
     }
+    .contact-info-card a:hover { color: #5b3a2e; }
 
-    .info-card a:hover { text-decoration: underline; text-underline-offset: 3px; }
-
-    .pen-card {
-      background: var(--bg-warm); border: 1px solid var(--rule);
-      border-radius: 8px; padding: 26px 22px;
-      text-align: center; display: flex;
-      flex-direction: column; align-items: center; gap: 12px;
-    }
-
-    .pen-card p {
-      font-family: var(--serif); font-size: 0.93rem;
-      font-style: italic; color: var(--soft); line-height: 1.65;
-    }
-
-    .form-success {
-      display: none; background: var(--bg-warm);
-      border: 1px solid var(--rule); border-radius: 6px; padding: 20px;
-    }
-
-    .form-success strong {
-      font-family: var(--serif); font-size: 1rem;
-      font-weight: 600; display: block; margin-bottom: 4px; color: var(--black);
-    }
-
-    .form-success span { font-size: 0.82rem; color: var(--muted); }
-
-    /* ══════════════════════════════
-       FOOTER
-    ══════════════════════════════ */
-    .footer { background: var(--black); color: var(--bg); margin-top: auto; }
-
+    /* ── FOOTER ── */
+    .footer { background: #241c15; color: #e9ddc9; margin-top: auto; }
     .footer-inner {
       max-width: var(--max); margin: 0 auto;
-      padding: 52px var(--pad) 28px;
-      display: grid; grid-template-columns: 1.4fr 1fr 1fr;
-      gap: 40px; border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 52px var(--pad) 30px;
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
+      gap: 36px 40px; border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-
+    .footer-brand { grid-column: 1/-1; max-width: 340px; }
     .footer-brand h2 {
-      font-family: var(--serif); font-size: 1.3rem;
-      font-weight: 600; margin-bottom: 9px; letter-spacing: -0.01em;
+      font-family: var(--serif); font-weight: 500;
+      font-size: 18px; letter-spacing: 0.14em; text-transform: uppercase;
+      margin-bottom: 10px; color: #e9ddc9;
     }
-
     .footer-brand p {
-      font-size: 0.81rem; line-height: 1.7;
-      color: rgba(250,249,246,0.38); font-weight: 300;
+      font-family: var(--serif); font-style: italic;
+      font-size: 15px; line-height: 1.6; color: rgba(233,221,201,0.5);
     }
-
     .footer-col h4 {
-      font-size: 0.62rem; font-weight: 700;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: rgba(250,249,246,0.28); margin-bottom: 14px;
+      font-family: var(--serif); font-size: 11px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(233,221,201,0.4); margin-bottom: 14px;
     }
-
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-
-    .footer-col button {
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer-col li button, .footer-col li a {
       background: none; border: none; cursor: pointer;
-      font-family: var(--sans); font-size: 0.82rem;
-      color: rgba(250,249,246,0.52); text-align: left;
-      padding: 0; transition: color 0.2s;
+      font-family: var(--serif); font-size: 14px;
+      color: rgba(233,221,201,0.62); padding: 0;
+      transition: color 0.2s; text-decoration: none; display: inline;
     }
-
-    .footer-col button:hover { color: var(--bg); }
-
+    .footer-col li button:hover, .footer-col li a:hover { color: #e9ddc9; }
     .footer-bottom {
-      max-width: var(--max); margin: 0 auto;
-      padding: 18px var(--pad);
+      max-width: var(--max); margin: 0 auto; padding: 18px var(--pad);
       display: flex; align-items: center; justify-content: space-between;
-      font-size: 0.7rem; color: rgba(250,249,246,0.24);
+      gap: 10px; flex-wrap: wrap;
+      font-family: var(--serif); font-size: 12px; color: rgba(233,221,201,0.4);
     }
+    .footer-bottom span:last-child { font-style: italic; }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 880px) {
-      .home-hero      { grid-template-columns: 1fr; gap: 48px; }
-      .about-grid     { grid-template-columns: 1fr; }
-      .contact-grid   { grid-template-columns: 1fr; }
-      .post-layout    { grid-template-columns: 1fr; }
-      .post-sidebar   { display: none; }
-      .posts-grid     { grid-template-columns: 1fr 1fr; }
-      .footer-inner   { grid-template-columns: 1fr 1fr; }
-    }
-
-    @media (max-width: 580px) {
-      .nav-links { gap: 1.2rem; }
-      .posts-grid  { grid-template-columns: 1fr; }
-      .form-row    { grid-template-columns: 1fr; }
-      .blog-entry  { grid-template-columns: 1fr; }
-      .be-num, .be-arrow { display: none; }
+    @media (max-width: 640px) {
+      .home-entry-row { grid-template-columns: 1fr 24px; gap: 12px; }
+      .home-entry-num { display: none; }
+      .journal-entry { grid-template-columns: 1fr; }
+      .je-num { display: none; }
       .footer-inner { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 6px; }
+      .footer-brand { grid-column: auto; }
     }
   </style>
 </head>
@@ -684,292 +400,137 @@
     </div>
   </nav>
 
-  <!-- ══════════════════════════════
-       HOME VIEW
-  ══════════════════════════════ -->
+  <!-- ══════════════════════════════ HOME ══════════════════════════════ -->
   <div class="view active" id="view-home">
-
-    <div class="home-hero">
-      <div>
-        <p class="hero-eyebrow">Writer &amp; Observer</p>
-        <h1 class="hero-h1">Words written<br>with <em>intention.</em></h1>
-        <p class="hero-sub">A personal record of small things noticed.</p>
-        <button class="btn-dark" onclick="navigate('blog')">
-          Read the blog
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M2 6.5h9M6.5 2l4.5 4.5L6.5 11"/>
-          </svg>
-        </button>
+    <div class="home-masthead">
+      <div class="masthead-rule">
+        <span></span>
+        <span class="masthead-est">Est. 2026</span>
+        <span></span>
       </div>
-
-      <div class="paper-card">
-        <svg class="paper-pen-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M24 3L29 8L11 26L4 29L7 22L24 3Z"/>
-          <path d="M21 6L26 11"/>
-        </svg>
-        <div class="paper-lines">
-          <div class="pl l"></div>
-          <div class="pl xl"></div>
-          <div class="pl m"></div>
-          <div class="pl l"></div>
-          <div class="pl s"></div>
-          <div class="pl xl"></div>
-          <div class="pl m"></div>
-          <div class="pl l"></div>
-          <div class="pl s"></div>
-        </div>
-        <div style="display:flex;justify-content:flex-end">
-          <svg width="56" height="18" viewBox="0 0 56 18" fill="none" style="opacity:0.18">
-            <path d="M2 9 Q14 3 28 5 L52 9 L48 11 L28 13 Q14 15 2 9Z" fill="#111"/>
-            <path d="M48 9L56 9.5L48 11" fill="#777"/>
-          </svg>
-        </div>
+      <div class="masthead-name">Anna Abraham</div>
+      <div class="masthead-sub">A personal record of small things noticed.</div>
+      <div class="masthead-photo-wrap">
+        <img src="homepage.jpg" alt="Homepage" class="masthead-photo" />
       </div>
     </div>
-
-    <div class="home-posts">
-      <div class="container">
-        <div class="home-posts-header">
-          <h2 class="section-title">Latest posts</h2>
-          <button class="text-link" onclick="navigate('blog')">
-            View all
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M2 6h8M6 2l4 4-4 4"/>
-            </svg>
-          </button>
-        </div>
-        <div class="posts-grid" id="home-posts-grid"></div>
+    <div class="home-blog-section">
+      <div class="home-blog-label">Recent Blogs</div>
+      <div class="home-entry-list" id="home-entry-list"></div>
+      <div class="home-blog-more">
+        <button onclick="navigate('blog')">Read the full blog →</button>
       </div>
     </div>
-
     <footer class="footer">
       <div class="footer-inner">
-        <div class="footer-brand">
-          <h2>Anna Abraham</h2>
-          <p>A personal record of small things noticed.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Pages</h4>
-          <ul>
-            <li><button onclick="navigate('home')">Home</button></li>
-            <li><button onclick="navigate('about')">About</button></li>
-            <li><button onclick="navigate('blog')">Blog</button></li>
-            <li><button onclick="navigate('contact')">Contact</button></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Info</h4>
-          <ul>
-            <li><button style="cursor:default">Est. 2025</button></li>
-                      </ul>
-        </div>
+        <div class="footer-brand"><h2>Anna Abraham</h2><p>A personal record of small things noticed.</p></div>
+        <div class="footer-col"><h4>Pages</h4><ul><li><button onclick="navigate('home')">Home</button></li><li><button onclick="navigate('about')">About</button></li><li><button onclick="navigate('blog')">Blog</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div>
+        <div class="footer-col"><h4>Elsewhere</h4><ul><li><a href="https://instagram.com/thiswasonceinfrontofme" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.linkedin.com/in/anna-abraham00/" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="mailto:annaabraham2311@gmail.com">Email</a></li></ul></div>
       </div>
-      <div class="footer-bottom">
-        <span>© 2025 Anna Abraham. All rights reserved.</span>
-        <span>Written with love.</span>
-      </div>
+      <div class="footer-bottom"><span>© 2026 Anna Abraham. All rights reserved.</span><span>Written with love.</span></div>
     </footer>
   </div>
 
-  <!-- ══════════════════════════════
-       ABOUT VIEW
-  ══════════════════════════════ -->
+  <!-- ══════════════════════════════ ABOUT ══════════════════════════════ -->
   <div class="view" id="view-about">
-    <div class="page-hero">
-      <div class="container">
-        <span class="tag">About me</span>
-        <h1>The person behind<br>the words.</h1>
-        <p>A personal record of small things noticed.</p>
+    <div class="page-head">
+      <div class="page-head-inner">
+        <span class="page-kicker">About</span>
+        <h1>The person behind the words.</h1>
       </div>
     </div>
-
-    <section class="about-section">
-      <div class="container">
-        <div class="about-grid">
-          <div class="about-body">
-            <p>Hello, I'm Anna.</p>
-            <p>I am a lawyer, a writer at heart, and a photographer when the light is right.</p>
-            <p>I did my LL.M at the University of Edinburgh, which is also, as it happens, where I live now. Law taught me to pay close attention to the details that other people walk past, because the detail you overlook is usually the one that matters most.</p>
-            <p>This blog is what happens when I cannot stop noticing things. The small, unremarkable scenes that most people pass through without a second thought. The moment just before something happens, and the strange, involuntary way the chest responds.</p>
-            <p>I grew up in India and moved to Edinburgh for the LL.M. Edinburgh has my heart.</p>
-            <p>I travel when I can, photograph what stops me, and write about what I cannot let go of. All three are, at their core, the same act.</p>
-            <p>If you have found your way here, I imagine you are the same kind of person. Or I might have shared this with you.</p>
-            <p>Welcome.</p>
-          </div>
-
-          <aside class="about-sidebar">
-            <div class="notebook-card">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.1" style="margin-bottom:12px;opacity:0.6">
-                <rect x="3" y="2" width="16" height="20" rx="2"/>
-                <path d="M7 7h8M7 11h8M7 15h5"/>
-                <path d="M3 6h1M3 12h1M3 18h1"/>
-              </svg>
-              <div class="nb l"></div>
-              <div class="nb xl"></div>
-              <div class="nb m"></div>
-              <div class="nb l"></div>
-              <div class="nb s"></div>
-              <div class="nb xl"></div>
-            </div>
-            <div class="sidebar-card">
-              <h3>Quick facts</h3>
-              <ul>
-                <li>Cuppa tea before words, always</li>
-                <li>Chronic note-taker</li>
-                <li>Thinks in long sentences</li>
-                <li>Believes peace is the whole point</li>
-              </ul>
-            </div>
-            <div class="sidebar-card">
-              <h3>Interests</h3>
-              <ul>
-                <li>Photography</li>
-                <li>Plants and nature</li>
-                <li>Visual storytelling</li>
-                <li>Architecture</li>
-              </ul>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </section>
-
+    <div class="about-prose">
+      <p>Hello, I'm Anna. I am a lawyer, a writer at heart, and a photographer when the light is right.</p>
+      <p>I did my LL.M in Intellectual Property Law at the University of Edinburgh, which is also, as it happens, where I live now. Law taught me to pay close attention to the details that other people walk past, because the detail you overlook is usually the one that matters most.</p>
+      <p>This blog is what happens when I cannot stop noticing things. The small, unremarkable scenes that most people pass through without a second thought. The moment just before something happens, and the strange, involuntary way the chest responds.</p>
+      <p>I grew up in India and moved to Edinburgh for the LL.M. Edinburgh has my heart.</p>
+      <blockquote class="about-pull">I travel when I can, photograph what stops me, and write about what I cannot let go of. All three are, at their core, the same act.</blockquote>
+      <p>If you have found your way here, I imagine you are the same kind of person. Or I might have shared this with you.</p>
+      <p>Welcome.</p>
+    </div>
     <footer class="footer">
       <div class="footer-inner">
         <div class="footer-brand"><h2>Anna Abraham</h2><p>A personal record of small things noticed.</p></div>
         <div class="footer-col"><h4>Pages</h4><ul><li><button onclick="navigate('home')">Home</button></li><li><button onclick="navigate('about')">About</button></li><li><button onclick="navigate('blog')">Blog</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div>
-        <div class="footer-col"><h4>Info</h4><ul><li><button style="cursor:default">Est. 2025</button></li></ul></div>
+        <div class="footer-col"><h4>Elsewhere</h4><ul><li><a href="https://instagram.com/thiswasonceinfrontofme" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.linkedin.com/in/anna-abraham00/" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="mailto:annaabraham2311@gmail.com">Email</a></li></ul></div>
       </div>
-      <div class="footer-bottom"><span>© 2025 Anna Abraham. All rights reserved.</span><span>Written with love.</span></div>
+      <div class="footer-bottom"><span>© 2026 Anna Abraham. All rights reserved.</span><span>Written with love.</span></div>
     </footer>
   </div>
 
-  <!-- ══════════════════════════════
-       BLOG VIEW
-  ══════════════════════════════ -->
+  <!-- ══════════════════════════════ BLOG ══════════════════════════════ -->
   <div class="view" id="view-blog">
-    <div class="page-hero">
-      <div class="container">
-        <span class="tag">All posts</span>
-        <h1>The blog.</h1>
+    <div class="page-head">
+      <div class="page-head-inner">
+        <h1>The Blog</h1>
         <p>A personal record of small things noticed.</p>
       </div>
     </div>
-
-    <section class="blogs-section">
-      <div class="container">
-        <div class="blogs-toolbar">
-          <span class="blogs-count" id="blogs-count">—</span>
-        </div>
-        <div class="blog-list" id="blog-list"></div>
-      </div>
-    </section>
-
+    <div class="journal-list-wrap">
+      <div class="journal-list" id="blog-list"></div>
+    </div>
     <footer class="footer">
       <div class="footer-inner">
         <div class="footer-brand"><h2>Anna Abraham</h2><p>A personal record of small things noticed.</p></div>
         <div class="footer-col"><h4>Pages</h4><ul><li><button onclick="navigate('home')">Home</button></li><li><button onclick="navigate('about')">About</button></li><li><button onclick="navigate('blog')">Blog</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div>
-        <div class="footer-col"><h4>Info</h4><ul><li><button style="cursor:default">Est. 2025</button></li></ul></div>
+        <div class="footer-col"><h4>Elsewhere</h4><ul><li><a href="https://instagram.com/thiswasonceinfrontofme" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.linkedin.com/in/anna-abraham00/" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="mailto:annaabraham2311@gmail.com">Email</a></li></ul></div>
       </div>
-      <div class="footer-bottom"><span>© 2025 Anna Abraham. All rights reserved.</span><span>Written with love.</span></div>
+      <div class="footer-bottom"><span>© 2026 Anna Abraham. All rights reserved.</span><span>Written with love.</span></div>
     </footer>
   </div>
 
-  <!-- ══════════════════════════════
-       POST VIEW
-  ══════════════════════════════ -->
+  <!-- ══════════════════════════════ POST ══════════════════════════════ -->
   <div class="view" id="view-post">
     <div id="post-root"></div>
     <footer class="footer">
       <div class="footer-inner">
         <div class="footer-brand"><h2>Anna Abraham</h2><p>A personal record of small things noticed.</p></div>
         <div class="footer-col"><h4>Pages</h4><ul><li><button onclick="navigate('home')">Home</button></li><li><button onclick="navigate('about')">About</button></li><li><button onclick="navigate('blog')">Blog</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div>
-        <div class="footer-col"><h4>Info</h4><ul><li><button style="cursor:default">Est. 2025</button></li></ul></div>
+        <div class="footer-col"><h4>Elsewhere</h4><ul><li><a href="https://instagram.com/thiswasonceinfrontofme" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.linkedin.com/in/anna-abraham00/" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="mailto:annaabraham2311@gmail.com">Email</a></li></ul></div>
       </div>
-      <div class="footer-bottom"><span>© 2025 Anna Abraham. All rights reserved.</span><span>Written with love.</span></div>
+      <div class="footer-bottom"><span>© 2026 Anna Abraham. All rights reserved.</span><span>Written with love.</span></div>
     </footer>
   </div>
 
-  <!-- ══════════════════════════════
-       CONTACT VIEW
-  ══════════════════════════════ -->
+  <!-- ══════════════════════════════ CONTACT ══════════════════════════════ -->
   <div class="view" id="view-contact">
-    <div class="page-hero">
-      <div class="container">
-        <span class="tag">Get in touch</span>
+    <div class="page-head">
+      <div class="page-head-inner">
+        <span class="page-kicker">Get in touch</span>
         <h1>Say hello.</h1>
-        <p>Have a thought, a response to something you read, or just want to connect? Write in.</p>
+        <p>A response to something you read, a question, or simply that a piece stayed with you.</p>
       </div>
     </div>
-
-    <section class="contact-section">
-      <div class="container">
-        <div class="contact-grid">
-          <div>
-            <p class="contact-intro">Whether you have a response to something you read, a question you'd like answered, or simply want to say that a piece stayed with you — write in. The best conversations begin with a single sentence.</p>
-            <form class="form" id="contact-form">
-              <div class="form-row">
-                <div class="field">
-                  <label for="c-name">Your name</label>
-                  <input type="text" id="c-name" placeholder="Full name" required autocomplete="off" />
-                </div>
-                <div class="field">
-                  <label for="c-email">Email address</label>
-                  <input type="email" id="c-email" placeholder="you@email.com" required autocomplete="off" />
-                </div>
-              </div>
-              <div class="field">
-                <label for="c-subject">Subject</label>
-                <input type="text" id="c-subject" placeholder="What's this about?" autocomplete="off" />
-              </div>
-              <div class="field">
-                <label for="c-message">Message</label>
-                <textarea id="c-message" placeholder="Write here…" required></textarea>
-              </div>
-              <div><button type="submit" class="btn-dark">Send message</button></div>
-            </form>
-            <div class="form-success" id="form-success">
-              <strong>Message sent.</strong>
-              <span>Thank you for reaching out. Every message is read.</span>
-            </div>
-          </div>
-
-          <aside class="contact-aside">
-            <div class="pen-card">
-              <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.3">
-                <path d="M34 5L39 10L16 33L7 37L11 28L34 5Z"/>
-                <path d="M30 9L35 14"/>
-                <path d="M7 37L11 28"/>
-              </svg>
-              <p>"The best conversations begin with a single, honest sentence."</p>
-            </div>
-            <div class="info-card">
-              <h3>Email</h3>
-              <p><a href="mailto:annaabraham2311@gmail.com">annaabraham2311@gmail.com</a></p>
-            </div>
-            <div class="info-card">
-              <h3>Instagram</h3>
-              <p><a href="https://instagram.com/thiswasonceinfrontofme" target="_blank" rel="noopener">@thiswasonceinfrontofme</a></p>
-            </div>
-          </aside>
-        </div>
+    <div class="contact-cards">
+      <div class="contact-quote-card">
+        <p>"The best conversations begin with a single, honest sentence."</p>
       </div>
-    </section>
-
+      <div class="contact-info-card">
+        <h3>Email</h3>
+        <a href="mailto:annaabraham2311@gmail.com">annaabraham2311@gmail.com</a>
+      </div>
+      <div class="contact-info-card">
+        <h3>Instagram</h3>
+        <a href="https://instagram.com/thiswasonceinfrontofme" target="_blank" rel="noopener">@thiswasonceinfrontofme</a>
+      </div>
+      <div class="contact-info-card">
+        <h3>LinkedIn</h3>
+        <a href="https://www.linkedin.com/in/anna-abraham00/" target="_blank" rel="noopener">Anna Abraham</a>
+      </div>
+    </div>
     <footer class="footer">
       <div class="footer-inner">
         <div class="footer-brand"><h2>Anna Abraham</h2><p>A personal record of small things noticed.</p></div>
         <div class="footer-col"><h4>Pages</h4><ul><li><button onclick="navigate('home')">Home</button></li><li><button onclick="navigate('about')">About</button></li><li><button onclick="navigate('blog')">Blog</button></li><li><button onclick="navigate('contact')">Contact</button></li></ul></div>
-        <div class="footer-col"><h4>Info</h4><ul><li><button style="cursor:default">Est. 2025</button></li></ul></div>
+        <div class="footer-col"><h4>Elsewhere</h4><ul><li><a href="https://instagram.com/thiswasonceinfrontofme" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.linkedin.com/in/anna-abraham00/" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="mailto:annaabraham2311@gmail.com">Email</a></li></ul></div>
       </div>
-      <div class="footer-bottom"><span>© 2025 Anna Abraham. All rights reserved.</span><span>Written with love.</span></div>
+      <div class="footer-bottom"><span>© 2026 Anna Abraham. All rights reserved.</span><span>Written with love.</span></div>
     </footer>
   </div>
 
   <script>
     /* ── Router ── */
     let currentView = 'home';
-    let currentPostId = null;
 
     function navigate(view, postId) {
       document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -985,45 +546,44 @@
       if (view === 'home')    renderHome();
       if (view === 'blog')    renderBlog();
       if (view === 'post')    renderPost(postId);
-      if (view === 'contact') resetContact();
     }
 
-    /* ── Render home posts ── */
+    /* ── Render home: latest 3 entries ── */
     function renderHome() {
       const posts = JSON.parse(localStorage.getItem('posts') || '[]');
-      const grid  = document.getElementById('home-posts-grid');
-      grid.innerHTML = '';
+      const list  = document.getElementById('home-entry-list');
+      list.innerHTML = '';
 
       if (posts.length === 0) {
-        grid.innerHTML = `<div class="empty-state"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#bbb" stroke-width="1.2"><rect x="7" y="4" width="26" height="32" rx="2"/><path d="M13 13h14M13 19h14M13 25h9"/></svg><p>No posts yet. Check back soon.</p></div>`;
+        list.innerHTML = `<p style="font-family:var(--serif);font-style:italic;color:var(--muted);text-align:center;padding:48px 0">No posts yet. Check back soon.</p>`;
         return;
       }
 
       posts.slice().reverse().slice(0, 3).forEach((post, i) => {
         const idx  = posts.length - 1 - i;
-        const card = document.createElement('div');
-        card.className = 'post-card';
-        card.innerHTML = `
-          <span class="pc-date">${new Date(post.date).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</span>
-          <h3 class="pc-title">${post.title}</h3>
-          <p class="pc-excerpt">${post.body.slice(0,120)}${post.body.length>120?'…':''}</p>
-          <span class="pc-read">Read more →</span>`;
-        card.addEventListener('click', () => navigate('post', idx));
-        grid.appendChild(card);
+        const row  = document.createElement('div');
+        row.className = 'home-entry-row';
+        row.innerHTML = `
+          <span class="home-entry-num">${String(i + 1).padStart(2, '0')}</span>
+          <div class="home-entry-body">
+            <span class="home-entry-date">${new Date(post.date).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</span>
+            <h2 class="home-entry-title">${post.title}</h2>
+            ${post.subtitle ? `<p class="home-entry-sub">${post.subtitle}</p>` : ''}
+          </div>
+          <span class="home-entry-arrow">→</span>`;
+        row.addEventListener('click', () => navigate('post', idx));
+        list.appendChild(row);
       });
     }
 
-    /* ── Render blog list ── */
+    /* ── Render blog journal list ── */
     function renderBlog() {
-      const posts   = JSON.parse(localStorage.getItem('posts') || '[]');
-      const list    = document.getElementById('blog-list');
-      const countEl = document.getElementById('blogs-count');
-
-      countEl.textContent = posts.length + (posts.length === 1 ? ' post' : ' posts');
+      const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+      const list  = document.getElementById('blog-list');
       list.innerHTML = '';
 
       if (posts.length === 0) {
-        list.innerHTML = `<div style="padding:72px 0;text-align:center"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="#bbb" stroke-width="1.2" style="margin:0 auto 16px"><rect x="8" y="4" width="28" height="36" rx="3"/><path d="M15 14h14M15 20h14M15 26h9"/></svg><p style="font-family:var(--serif);font-size:1.1rem;font-style:italic;color:var(--muted)">Nothing here yet.</p></div>`;
+        list.innerHTML = `<p style="font-family:var(--serif);font-style:italic;color:var(--muted);text-align:center;padding:80px 0">Nothing here yet.</p>`;
         return;
       }
 
@@ -1032,21 +592,20 @@
         const words = post.body.trim().split(/\s+/).length;
         const mins  = Math.max(1, Math.round(words / 200));
         const entry = document.createElement('div');
-        entry.className = 'blog-entry';
+        entry.className = 'journal-entry';
         entry.innerHTML = `
-          <span class="be-num">${String(i+1).padStart(2,'0')}</span>
-          <div>
-            <p class="be-date">${new Date(post.date).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})} &nbsp;·&nbsp; ${mins} min read</p>
-            <h2 class="be-title">${post.title}</h2>
-            <p class="be-excerpt">${post.body.slice(0,170)}${post.body.length>170?'…':''}</p>
-          </div>
-          <span class="be-arrow">→</span>`;
+          <span class="je-num">${String(i + 1).padStart(2, '0')}</span>
+          <div class="je-body">
+            <span class="je-meta">${new Date(post.date).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})} · ${mins} min read</span>
+            <h2 class="je-title">${post.title}</h2>
+            ${post.subtitle ? `<p class="je-sub">${post.subtitle}</p>` : ''}
+          </div>`;
         entry.addEventListener('click', () => navigate('post', idx));
         list.appendChild(entry);
       });
     }
 
-    /* ── Render post ── */
+    /* ── Render single post ── */
     function renderPost(id) {
       currentPostId = id;
       const posts = JSON.parse(localStorage.getItem('posts') || '[]');
@@ -1054,7 +613,7 @@
       const root  = document.getElementById('post-root');
 
       if (!post) {
-        root.innerHTML = `<div class="container" style="padding:80px 0;text-align:center"><p style="font-family:var(--serif);font-size:1.2rem;font-style:italic;color:var(--muted)">Post not found.</p></div>`;
+        root.innerHTML = `<div style="padding:80px 20px;text-align:center"><p style="font-family:var(--serif);font-style:italic;color:var(--muted)">Post not found.</p></div>`;
         return;
       }
 
@@ -1066,64 +625,22 @@
       const nextId   = id < posts.length - 1 ? id + 1 : null;
 
       root.innerHTML = `
-        <div class="post-header">
-          <div class="container">
-            <button class="post-back" onclick="navigate('blog')">
-              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2L4 6.5 9 11"/></svg>
-              All posts
-            </button>
-            <div class="post-chips">
-              <span class="chip">${new Date(post.date).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</span>
-              <span class="chip">${mins} min read</span>
-              <span class="chip">${words} words</span>
-            </div>
-            <h1 class="post-h1">${post.title}</h1>
-            ${post.subtitle ? `<p class="post-subtitle">${post.subtitle}</p>` : ''}
-          </div>
+        <div class="post-head">
+          <span class="post-kicker">${new Date(post.date).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})} · ${mins} min read</span>
+          <h1 class="post-title">${post.title}</h1>
+          ${post.subtitle ? `<p class="post-deck">${post.subtitle}</p>` : ''}
         </div>
-        <div class="container">
-          <div class="post-layout">
-            <article class="post-body">${bodyHtml}</article>
-            <aside class="post-sidebar">
-              <div class="post-sidebar-card">
-                <h4>About this post</h4>
-                <p>Published ${new Date(post.date).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}.<br><br>${words} words · ${mins} min read.</p>
-              </div>
-              <div class="post-sidebar-card">
-                <h4>Written by</h4>
-                <p>Anna Abraham<br><br><button onclick="navigate('about')" style="font-size:0.78rem;font-weight:600;text-decoration:underline;text-underline-offset:3px;background:none;border:none;cursor:pointer;font-family:var(--sans);color:var(--ink);padding:0">About the author →</button></p>
-              </div>
-              <div style="background:var(--bg-warm);border:1px solid var(--rule);border-radius:8px;padding:20px;position:relative;overflow:hidden">
-                <div style="position:absolute;top:0;left:34px;width:1px;height:100%;background:#dcc8f0;opacity:0.4"></div>
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#aaa" stroke-width="1.1" style="margin-bottom:10px;opacity:0.7"><path d="M15 2L18 5L7 16L2 18L4 13L15 2Z" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 4L16 7" stroke-linecap="round"/></svg>
-                <div style="height:1px;background:var(--rule-lt);margin-bottom:10px"></div>
-                <div style="height:1px;background:var(--rule-lt);width:78%;margin-bottom:10px"></div>
-                <div style="height:1px;background:var(--rule-lt);width:58%;margin-bottom:10px"></div>
-                <div style="height:1px;background:var(--rule-lt);width:88%"></div>
-              </div>
-            </aside>
-          </div>
-          <div class="post-nav-row">
-            <button class="post-nav-btn" onclick="${prevId!==null?`navigate('post',${prevId})`:'void(0)'}" style="visibility:${prevId!==null?'visible':'hidden'}">← Previous</button>
-            <button class="post-nav-btn" onclick="${nextId!==null?`navigate('post',${nextId})`:'void(0)'}" style="visibility:${nextId!==null?'visible':'hidden'}">Next →</button>
-          </div>
+        ${post.photo ? `<div class="post-photo-wrap"><img src="${post.photo}" alt="${post.title}" class="post-photo" /></div>` : ''}
+        <div class="post-body-wrap">
+          <article class="post-body">${bodyHtml}</article>
+        </div>
+        ${post.photo2 ? `<div class="post-photo-wrap"><img src="${post.photo2}" alt="${post.title}" class="post-photo" /></div>` : ''}
+        <div class="post-nav">
+          ${prevId !== null ? `<button class="post-nav-btn" onclick="navigate('post',${prevId})">← Previous</button>` : '<span></span>'}
+          <button class="post-nav-btn post-nav-center" onclick="navigate('blog')">All posts</button>
+          ${nextId !== null ? `<button class="post-nav-btn" onclick="navigate('post',${nextId})">Next →</button>` : '<span></span>'}
         </div>`;
     }
-
-    /* ── Contact form ── */
-    function resetContact() {
-      const form    = document.getElementById('contact-form');
-      const success = document.getElementById('form-success');
-      form.style.display    = '';
-      success.style.display = 'none';
-      form.reset();
-    }
-
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      this.style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
-    });
 
     /* ── Seed posts ── */
     (function seedPosts() {
@@ -1306,6 +823,8 @@ That golden retriever knew everything.`
           title:    'North Berwick, Again',
           subtitle: 'A second attempt and a misleading forecast.',
           date:     '2026-06-25',
+          photo:    'north berwick.jpg',
+          photo2:   'north berwick 2.jpg',
           body:     `Something flew across my table.
 
 I was halfway into a cup of tea and a plate of chips in a cafe in North Berwick when it happened. It came from the lady at the next table, who was locked in a battle with a lobster. She said sorry. I smiled, told her it was okay, and went back to my cuppa.
@@ -1318,7 +837,7 @@ Rewind a few hours, and nothing about this day was going my way.
 
 It was a sunny morning, and for the second time in two days I had planned a trip to North Berwick. The previous visit had been wonderful, full of sunshine, except for one regret. I had gone in full jeans and shoes, so I never got into the water. This time I was going back for the sea. 
 
-Just as I was almost at the bus stop, a bus sailed past. It wasn't even the one I was aiming for, but I am the kind of person who leaves early, arrives early and reaches before time for everything. So watching it go made me think I should have started even earlier. My own bus, when it finally came, was half an hour late. By the time I reached the city, I had four minutes to catch my train, and I was not going to wait another hour for the next one. So I crossed the road, ran through the crowd, past everyone moving at a normal human pace, all the way to the station. With two minutes left, I got into the train, panting.
+Just as I was almost at the bus stop, a bus sailed past. It wasn't even the one I was aiming for, but I am the kind of person who leaves early, arrives early and reaches before time for everything, so watching it go made me think I should have started even earlier. My own bus, when it finally came, was half an hour late. By the time I reached the city, I had four minutes to catch my train, and I was not going to wait another hour for the next one. So I crossed the road, ran through the crowd, past everyone moving at a normal human pace, all the way to the station. With two minutes left, I got into the train, panting.
 
 "I did it!!"
 
@@ -1495,7 +1014,7 @@ And then they were gone, and it was just a bus again.`
       // Upsert each post — add if missing, update subtitle if already there
       catalogue.forEach(entry => {
         const idx = posts.findIndex(p => p.title === entry.title);
-        const obj = { title: entry.title, subtitle: entry.subtitle, body: entry.body, date: new Date(entry.date).toISOString() };
+        const obj = { title: entry.title, subtitle: entry.subtitle, body: entry.body, date: new Date(entry.date).toISOString(), photo: entry.photo || null, photo2: entry.photo2 || null };
         if (idx === -1) posts.push(obj);
         else posts[idx] = obj; // refresh so subtitle is always current
       });
