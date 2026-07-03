@@ -560,8 +560,9 @@
         return;
       }
 
-      posts.slice().reverse().slice(0, 3).forEach((post, i) => {
-        const idx  = posts.length - 1 - i;
+      const sorted = posts.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+      sorted.slice(0, 3).forEach((post, i) => {
+        const idx  = posts.indexOf(post);
         const row  = document.createElement('div');
         row.className = 'home-entry-row';
         row.innerHTML = `
@@ -588,8 +589,9 @@
         return;
       }
 
-      posts.slice().reverse().forEach((post, i) => {
-        const idx   = posts.length - 1 - i;
+      const sorted = posts.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+      sorted.forEach((post, i) => {
+        const idx   = posts.indexOf(post);
         const words = post.body.trim().split(/\s+/).length;
         const mins  = Math.max(1, Math.round(words / 200));
         const entry = document.createElement('div');
