@@ -375,10 +375,11 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
-      .home-entry-row { grid-template-columns: 1fr 24px; gap: 12px; }
-      .home-entry-num { display: none; }
-      .journal-entry { grid-template-columns: 1fr; }
-      .je-num { display: none; }
+      .home-entry-row { grid-template-columns: 32px 1fr 24px; gap: 12px; }
+      .home-entry-num { font-size: 18px; }
+      .journal-entry { grid-template-columns: 36px 1fr; gap: 14px; }
+      .je-num { font-size: 20px; }
+      .je-title { font-size: 19px; }
       .footer-inner { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 6px; }
       .footer-brand { grid-column: auto; }
@@ -498,7 +499,7 @@
       <div class="page-head-inner">
         <span class="page-kicker">Get in touch</span>
         <h1>Say hello.</h1>
-        <p>Write a response to something you read, ask a question, or share a piece that stayed with you.</p>
+        <p>A response to something you read, a question, or simply that a piece stayed with you.</p>
       </div>
     </div>
     <div class="contact-cards">
