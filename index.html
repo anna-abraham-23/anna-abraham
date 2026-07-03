@@ -620,12 +620,16 @@
         return;
       }
 
+      const sorted   = posts.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+      const sortedIdx = sorted.findIndex(p => p.title === post.title);
       document.title = post.title + ' — Anna Abraham';
       const words    = post.body.trim().split(/\s+/).length;
       const mins     = Math.max(1, Math.round(words / 200));
       const bodyHtml = '<p>' + post.body.replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>') + '</p>';
-      const prevId   = id > 0 ? id - 1 : null;
-      const nextId   = id < posts.length - 1 ? id + 1 : null;
+      const prevPost = sortedIdx > 0 ? sorted[sortedIdx - 1] : null;
+      const nextPost = sortedIdx < sorted.length - 1 ? sorted[sortedIdx + 1] : null;
+      const prevId   = prevPost ? posts.indexOf(prevPost) : null;
+      const nextId   = nextPost ? posts.indexOf(nextPost) : null;
 
       root.innerHTML = `
         <div class="post-head">
