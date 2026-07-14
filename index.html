@@ -282,6 +282,13 @@
     .post-body-wrap {
       max-width: 78ch; margin: 0 auto; padding: 56px var(--pad) 8px;
     }
+    .post-inline-photo {
+      margin: 40px calc(-1 * var(--pad));
+    }
+    .post-inline-photo img {
+      width: 100%; max-height: 560px;
+      object-fit: cover; object-position: bottom; display: block; border-radius: 4px;
+    }
     .post-body p {
       font-family: var(--serif); font-size: 19px;
       line-height: 1.92; color: var(--ink);
@@ -625,7 +632,9 @@
       document.title = post.title + ' — Anna Abraham';
       const words    = post.body.trim().split(/\s+/).length;
       const mins     = Math.max(1, Math.round(words / 200));
-      const bodyHtml = '<p>' + post.body.replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>') + '</p>';
+      const bodyHtml = ('<p>' + post.body.replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>') + '</p>')
+        .replace(/\[\[photo:([^\]]+)\]\]/g, (_,src) =>
+          `</p><div class="post-inline-photo"><img src="${src}" alt="" class="post-photo" /></div><p>`);
       const prevPost = sortedIdx > 0 ? sorted[sortedIdx - 1] : null;
       const nextPost = sortedIdx < sorted.length - 1 ? sorted[sortedIdx + 1] : null;
       const prevId   = prevPost ? posts.indexOf(prevPost) : null;
@@ -1013,6 +1022,75 @@ When he got up to leave, he turned and wished me a good day, the genuine kind, n
 Then the bus emptied. People streamed down from the upper deck, gowns and suits filling the aisle all at once, fascinators bobbing, the whole beautiful crowd filing out onto the street in one long, unhurried procession. For a moment it looked less like a bus stop and more like the end of a ceremony.
 
 And then they were gone, and it was just a bus again.`
+        },
+        {
+          title:    'The Empty Wheelchair',
+          subtitle: 'On the way to say goodbye.',
+          date:     '2026-06-29',
+          photo:    'locks.jpg',
+          body:     `I was on my way to a funeral, carrying the kind of heaviness that reaches the place before you do.
+
+The woman who had died, and her husband, were both good friends of mine. I had grown close to the two of them over the years, and what stayed with me was the way he loved her. He was loving and caring in a way I had never seen in anyone. I do not think I will see that kind of love again. When she died, his grief settled into me alongside my own, and that was the weight I carried onto the bus.
+
+Then an old man got on.
+
+He came in with a wheelchair, though he was not sitting in it. He was pushing it, and it was empty. A bag sat on the seat, and beside it a white handbag, the kind a woman carries. He walked further in, parked the chair against one side, and sat down in the seat next to it.
+
+I tried not to stare, and failed.
+
+"What if he spent years pushing his wife in that chair," I thought, "and he is still pushing it out of habit, just without her weight in front of him now." The chair looked like something his hands could not put down. Then there was the handbag. "What if it was hers, and he carries it everywhere because leaving it behind would feel like leaving her behind."
+
+I knew none of this. I built the whole story in the length of a bus ride, the way grief fills you without your knowing. Still, the shape of it felt honest, and it pressed down harder on a morning that had no more room in it.
+
+By the time I reached the funeral, I was carrying two losses, the one I had come for and the one I had built out of an empty wheelchair.
+
+The service was good, in the way these things can be good, and it was heavy and sad from the first minute to the last. Funerals are never easy.
+
+The stranger on the bus was only a shadow of what waited for me. The real weight was in that room, saying goodbye to a woman I had cared about, and one question I could not put down. How is he going to live without her?`
+        },
+        {
+          title:    'A Day in the Fog',
+          subtitle: 'Lifeboat Day, a wishing stone, and come on, Susan.',
+          date:     '2026-07-11',
+          body:     `The weather app had promised cloud. What I got was fog, and I knew what that meant before I left.
+
+[[photo:fog.jpg]]
+
+It followed me the whole way. The train pulled out, the city fell away behind the windows, and Dunbar, when it came, was no clearer than home had been. Going somewhere new under fog means you never quite see it, and I had booked the trip anyway, so I went knowing the place would keep itself from me.
+
+A family sat across from me on the train, a husband and wife with two young daughters, and three golfers rode in the same coach with their gear, getting off just before me at Dunbar. I would meet every one of them again before the day was done.
+
+My friend was waiting to pick me up, and she talked the whole drive into town, the short history of Dunbar, which places were worth going to, which charity shops she liked. There were bagpipers standing about when we arrived, and neither of us knew why. I looked it up. It was Lifeboat Day, the town's own festival. What a day to visit!
+
+[[photo:parade.jpg]]
+
+The High Street turned it on just as we got there. The parade started. The pipes and drums came first, together, giving the sound of them in your chest before you saw them. Open cars carried the Gala King, the Gala Queen, and the maids of honour, each waving from their own. Behind came the lifeboats on their trailers, towed slow and proud, then two fire engines with their lights turning and sirens going, and a coast guard truck between them. Last came the motorbikes, dozens of Harleys and scooters, loud and horning, rattling the shopfronts. The whole town had come out for it. Phones went up in doorways, children were lifted onto shoulders, and people in wheelchairs had been brought down to the front so they could watch it pass.
+
+The harbour was packed, stalls all along the water and a small stage set up for the events. We walked along the wall around the harbour, looking for Sammy and Samantha, the two seals that live there. They never showed. I thought of Cooper, my dog, who comes out of the shower looking exactly like a seal, sleek and cute, and I missed him standing there scanning water that had nothing to give me. The fog was hiding the views and the sea was hiding its seals, and I was getting used to being shown nothing. Only the gulls turned up, nesting in noisy rows on the rock offshore, arguing over space the way gulls do.
+
+[[photo:harbour.jpg]]
+
+Then my friend took me to her caravan. A wall of red rock stood on the beach side, dropping away in rough layers like a small Grand Canyon, jellyfish washed up along the shore below it. She told me the tradition. Pick a stone, throw it into one of the layers, and make a wish. I found one that wasn't too heavy but not light either, and threw with everything I had. It bounced straight back down. "You can throw as many times as you like," she said, laughing. On the second try the stone caught a ledge and held. I closed my eyes and made my wish, one I've kept close for a while now, something I really want to come true, and I left it there in the rock. Of everything the day showed me, that was the only thing I kept to myself.
+
+[[photo:canyon.jpg]]
+
+We had tea and biscuits and chocolate, and then she dropped me back at the station, and the last of the people were waiting for me there.
+
+There were only two platforms, and mine was the plainer one, a few seats under a shelter like a bus stop. Across the tracks a group of men were deep into cans of beer, singing loud enough that I caught every word. A group of four women joined them after a while, drunk and matching them for volume, laughing at things none of us could follow. Then the women broke off, climbed the footbridge, and came down onto my side. One of them asked where I was from and what had brought me to Dunbar. Then, without my asking, she told me about her own day. They were on a hen party, she said, tapping the flower garland at her neck. Most of them were in their sixties, everyone but the bride, her cousin, and her nana.
+
+A train pulled in on the far platform and the men scrambled aboard. As they got in, one of the women beside me leaned out shouting happy journey and blowing kisses across the tracks, and the men blew them right back through the windows.
+
+The rest of the bridal party turned up on the far platform after that, wine glasses still in hand, entirely unbothered by the time. The women near me stood and started shouting instructions across the tracks. "Susan, walk straight, climb the steps, cross the bridge, and come down, the train's coming." Susan looked over, nodded, and didn't move an inch. They called it out three or four more times before anyone budged, and by then I was chanting along in my own head, a total stranger to all of them. "Come on, Susan, hurry up, we're a team, come on, Susan, come on!"
+
+While that played out, the platform behind me had quietly filled. The family from the morning arrived with their two girls, the little one waving a lifeboat flag she'd picked up at the parade. A boy I hadn't seen before held a plastic AK-47. The three golfers turned up too, still with their gear.
+
+Susan made it across with seconds to spare, the bridal party trailing behind her, the nana bringing up the rear with her walking aid. The platform let out something close to a cheer. "Oh my god, what a relief, now I can rest in peace," I thought, and I still wasn't part of their group.
+
+The train came three minutes later. I stepped on, walked down to another coach, and just like that the noise was gone. Outside the window was the same grey that had met me in the morning, and it rode the whole way home with me.
+
+The fog never lifted. I never got to see Dunbar. I saw everyone in it.
+
+[[photo:beach.jpg]]`
         }
       ];
 
