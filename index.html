@@ -189,6 +189,14 @@
     .home-blog-more button:hover { letter-spacing: 0.2em; }
 
     /* ── ABOUT ── */
+    .about-photo-wrap {
+      max-width: 680px; margin: 0 auto; padding: 40px var(--pad) 0;
+    }
+    .about-photo {
+      width: 100%; max-height: 520px;
+      object-fit: cover; object-position: top;
+      display: block; border-radius: 6px;
+    }
     .about-prose {
       max-width: 680px; margin: 0 auto; padding: 56px var(--pad) 88px;
     }
@@ -446,6 +454,9 @@
         <span class="page-kicker">About</span>
         <h1>The person behind the words.</h1>
       </div>
+    </div>
+    <div class="about-photo-wrap">
+      <img src="self.jpg" alt="Anna Abraham" class="about-photo" />
     </div>
     <div class="about-prose">
       <p>Hello, I'm Anna. I am a lawyer, a writer at heart, and a photographer when the light is right.</p>
